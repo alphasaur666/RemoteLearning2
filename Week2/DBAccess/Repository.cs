@@ -60,7 +60,7 @@ namespace DBAccess
                 throw new InvalidCrudOperationException($"Insert operation executed on {TableName} without primary key value.");
             }
 
-            IEnumerable<string> fieldValues = GetFieldsWithValues(entity).Select(fwv => $"'{fwv.Value}'");
+            IEnumerable<string> fieldValues = GetFieldsWithValues(entity).Where(f => f.Value != null).Select(fwv => $"'{fwv.Value}'");
 
             string queryFields = string.Join(", ", tableFieldNames);
             string queryValues = string.Join(", ",  fieldValues);
@@ -101,8 +101,13 @@ namespace DBAccess
         {
             // primaryKeyValue is the value from entity which has the PrimaryKey attribute
             //return Delete(primaryKeyValue);
-            int primaryKeyValue = int.Parse(primaryKeyFieldPropertyInfo.GetValue(entity)?.ToString());
-            return Delete(primaryKeyValue);
+            string primaryKeyValueAsString = primaryKeyFieldPropertyInfo.GetValue(entity)?.ToString();
+            bool succeded = int.TryParse(primaryKeyValueAsString, out int primaryKeyValue);
+            if (succeded)
+            {
+                return Delete(primaryKeyValue);
+            }
+            else throw new InvalidCrudOperationException($"Couldnt execute delete operation on table {TableName}.");
 
         }
 
@@ -115,6 +120,7 @@ namespace DBAccess
             // DELETE FROM <TABLENAME> WHERE <PRIMARY_KEY_FIELD> = <ENTITY.PRIMARY_FIELD_VALUE_FROM_ENTITY>
 
         }
+        
 
         #region SetupFields
         private void SetupTableNonPrimaryFields(PropertyInfo[] allTableFieldsProperties)

@@ -43,8 +43,6 @@ namespace ConsoleApp2
                 Status = StatusEnum.Active
             };
 
-
-
             string insertOut = coolRepository.Insert(insert);
             Console.WriteLine("Insert: {0}", insertOut);
 
@@ -56,7 +54,7 @@ namespace ConsoleApp2
             };
 
             string deleteOut = coolRepository.Delete(delete);
-            string deleteOutWithID = coolRepository.Delete(3);
+            string deleteOutWithID = coolRepository.Delete(2);
 
             Console.WriteLine("Delete: {0}", deleteOut);
             Console.WriteLine("Delete with ID: {0}", deleteOutWithID);
