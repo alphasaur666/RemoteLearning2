@@ -102,12 +102,11 @@ namespace DBAccess
             // primaryKeyValue is the value from entity which has the PrimaryKey attribute
             //return Delete(primaryKeyValue);
             string primaryKeyValueAsString = primaryKeyFieldPropertyInfo.GetValue(entity)?.ToString();
-            bool succeded = int.TryParse(primaryKeyValueAsString, out int primaryKeyValue);
-            if (succeded)
+            if (int.TryParse(primaryKeyValueAsString, out int primaryKeyValue))
             {
                 return Delete(primaryKeyValue);
             }
-            else throw new InvalidCrudOperationException($"Couldnt execute delete operation on table {TableName}.");
+            throw new InvalidCrudOperationException($"Couldnt execute delete operation on table {TableName}.");
 
         }
 
