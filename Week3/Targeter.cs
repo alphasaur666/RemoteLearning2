@@ -11,22 +11,30 @@ namespace TaskHomework
     {
         public string fileName;
         public string targetPath;
-        Task<string> characterReader = ReadCharacters(@".\CallOfTheWild.txt");
         //string readerResult = characterReader.Result;
 
-
-        private static async Task<string> ReadCharacters(string fn)
+        public async Task<string> ReadTextAsync(string filePath)
         {
-            string text;
-            using(StreamReader streamReader = new StreamReader(fn))
+            using (FileStream sourceStream = new FileStream(filePath,
+                FileMode.Open, FileAccess.Read, FileShare.Read,
+                bufferSize: 4096, useAsync: true))
             {
-                text = await streamReader.ReadToEndAsync();
+                StringBuilder sb = new StringBuilder();
+
+                byte[] buffer = new byte[0x1000];
+                int numRead;
+                while ((numRead = await sourceStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+                {
+                    string text = Encoding.Unicode.GetString(buffer, 0, numRead);
+                    sb.Append(text);
+                }
+
+                return sb.ToString();
             }
-            return text;
         }
 
 
-        private string computeSHA(string rawData)
+        public string computeSHA(string rawData)
         {
             using(SHA256 sha256Hash = SHA256.Create())
             {
@@ -37,7 +45,6 @@ namespace TaskHomework
                     stringBuilder.Append(bytes[i].ToString("x2"));
                 }
                 return stringBuilder.ToString();
-
             }
         }
     }
