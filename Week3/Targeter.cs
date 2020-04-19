@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TaskHomework
 {
-    class Targeter
+    internal class Targeter
     {
         public string fileName;
         public string targetPath;
@@ -47,6 +47,43 @@ namespace TaskHomework
                 return stringBuilder.ToString();
             }
         }
+
+        public void fileDetails(string file)
+        {
+            FileInfo fileInfo = new FileInfo(file);
+            Console.WriteLine($"File {file} has {fileInfo.Length}.");
+        }
+
+        public void ParseFolder()
+        {
+
+            string[] files = Directory.GetFiles(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName);
+            FileCopier fileCopier = new FileCopier();
+
+
+            Parallel.ForEach(files, (currentFile) =>
+            {
+                string fileName = Path.GetFileName(currentFile);
+                Console.WriteLine($"Found file {fileName}..");
+                Console.WriteLine($"File {fileName} having SHA value {computeSHA(fileName)}");               
+            });
+        }
+
+        public bool verifySHA(string sourceFileSHA, string destinationFileSHA)
+        {
+            if(sourceFileSHA == destinationFileSHA)
+            {
+                Console.WriteLine($"The sha is {destinationFileSHA} and it matches to the one before copying.");
+            }
+            else
+            {
+                Console.WriteLine($"The sha is {destinationFileSHA} and it doesnt match to the one before copying.");
+            }
+
+            return true;
+        }
+
+
     }
 
 
