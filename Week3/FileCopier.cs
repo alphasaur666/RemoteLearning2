@@ -9,8 +9,6 @@ namespace TaskHomework
     public class FileCopier
     {
         
-
-
         public async Task ProcessWriteAsync(string sourceDirectory, string destinationDirectory)
         {
             await MoveAsync(sourceDirectory, destinationDirectory);
@@ -35,9 +33,12 @@ namespace TaskHomework
                         string destinationFileSHA = targeter.computeSHA(filename.Substring(filename.LastIndexOf('\\')));
                         targeter.verifySHA(sourceFileSHA, destinationFileSHA);
                         await sourceStream.CopyToAsync(destinationStream);
+
                     }
                 }
             }
+            Console.WriteLine("Finished. All files are now moved in the new folder.");
+            targeter.fileRankings(destinationDirectory);
         }
 
 

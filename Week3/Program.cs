@@ -17,7 +17,9 @@ namespace TaskHomework
             Task copy = copier.ProcessWriteAsync(sourceFolder, destinationFolder);
             Task.Run(() => copy);
             Task.WaitAll(copy);
+
             
+
         }
     }
 }

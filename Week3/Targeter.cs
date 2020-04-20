@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +10,7 @@ namespace TaskHomework
 {
     internal class Targeter
     {
-
-        //string readerResult = characterReader.Result;
-
+ 
         public async Task<string> ReadTextAsync(string filePath)
         {
             using (FileStream sourceStream = new FileStream(filePath,
@@ -53,6 +52,20 @@ namespace TaskHomework
             Console.WriteLine($"File {fileName} has {fileInfo.Length}.");
         }
 
+
+        public void fileRankings(string targetDirectory)
+        {
+            var files = Directory.GetFiles(targetDirectory);
+            foreach(var file in files)
+            {
+                string fileName = Path.GetFileName(file);
+                var fileInfo = new FileInfo(file);
+                var fileSize = fileInfo.Length;
+                var sorted = files.OrderBy(f => new FileInfo(f).Length);
+                Console.WriteLine($"Filename: {fileName}, FileSize: {fileSize}.");
+            }
+            
+        }
 
         public string[] ParseFolder(string sourceFolder)
         {           
