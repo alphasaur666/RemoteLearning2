@@ -8,42 +8,36 @@ namespace TaskHomework
 {
     public class FileCopier
     {
-        //private string[] filesPath = Directory.GetFiles(@"TaskHomework\Folder1");
-        public string sourceFile;
-        public string destinationFile;
-        public string projectDirectory = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+        
 
-        public FileCopier()
+
+        public async Task ProcessWriteAsync(string sourceDirectory, string destinationDirectory)
         {
+            await MoveAsync(sourceDirectory, destinationDirectory);
         }
 
-
-        public async Task ProcessWriteAsync(string sourceFile, string destinationFile)
-        {
-            await MoveAsync(sourceFile, destinationFile);
-        }
-
-        private static async Task MoveAsync(string sourceFile, string destinationFile)
+        private static async Task MoveAsync(string sourceDirectory, string destinationDirectory)
         {
             Targeter targeter = new Targeter();
-            string sourceFileSHA = targeter.computeSHA(sourceFile);
-            Console.WriteLine($"Started the moving for file {sourceFile}.");
-            
-            using (Stream source = File.Open(sourceFile, FileMode.Open, FileAccess.Read))
-            {
-                using (Stream destination = File.Open(destinationFile, FileMode.CreateNew, FileAccess.Write))
-                {
-                    Console.WriteLine($"Finished the moving for file {sourceFile}.");
-                    targeter.fileDetails(sourceFile);
-                    string destinationFileSHA = targeter.computeSHA(destinationFile);
-                    targeter.verifySHA(sourceFileSHA, destinationFileSHA);
-                    await source.CopyToAsync(destination);                  
-                    
+            foreach (string dirPath in Directory.GetDirectories(sourceDirectory, "*", SearchOption.AllDirectories))
+                Directory.CreateDirectory(dirPath.Replace(sourceDirectory, destinationDirectory));
 
-                    
+            foreach (string filename in Directory.EnumerateFiles(sourceDirectory))
+            {
+                string sourceFileSHA = targeter.computeSHA(filename);
+                Console.WriteLine($"Started the moving for file {filename}.");
+                using (FileStream sourceStream = File.Open(filename, FileMode.Open))
+                {
+                    using (FileStream destinationStream = File.Create(destinationDirectory+ filename.Substring(filename.LastIndexOf('\\'))))
+                    {
+                        Console.WriteLine($"Finished the moving for file {filename}.");
+                        targeter.fileDetails(filename);
+                        string destinationFileSHA = targeter.computeSHA(filename.Substring(filename.LastIndexOf('\\')));
+                        targeter.verifySHA(sourceFileSHA, destinationFileSHA);
+                        await sourceStream.CopyToAsync(destinationStream);
+                    }
                 }
             }
-            Console.WriteLine($"Finished. All files are now moved on the new folder.");
         }
 
 

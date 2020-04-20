@@ -9,11 +9,15 @@ namespace TaskHomework
     {
         static void Main(string[] args)
         {
+            Targeter target = new Targeter();
             FileCopier copier = new FileCopier();
-            Task copy = copier.ProcessWriteAsync(copier.projectDirectory+@"\Folder1\TextFile1.txt", copier.projectDirectory+@"\Folder2\TextFile1.txt");
+            string sourceFolder = @"C:\Users\Razvan\source\repos\TaskHomework\TaskHomework\Folder1";
+            string destinationFolder = @"C:\Users\Razvan\source\repos\TaskHomework\TaskHomework\Folder2";
+            string[] sourceFiles = target.ParseFolder(sourceFolder);
+            Task copy = copier.ProcessWriteAsync(sourceFolder, destinationFolder);
             Task.Run(() => copy);
             Task.WaitAll(copy);
-
+            
         }
     }
 }

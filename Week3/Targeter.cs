@@ -9,8 +9,7 @@ namespace TaskHomework
 {
     internal class Targeter
     {
-        public string fileName;
-        public string targetPath;
+
         //string readerResult = characterReader.Result;
 
         public async Task<string> ReadTextAsync(string filePath)
@@ -48,25 +47,26 @@ namespace TaskHomework
             }
         }
 
-        public void fileDetails(string file)
+        public void fileDetails(string fileName)
         {
-            FileInfo fileInfo = new FileInfo(file);
-            Console.WriteLine($"File {file} has {fileInfo.Length}.");
+            FileInfo fileInfo = new FileInfo(fileName);
+            Console.WriteLine($"File {fileName} has {fileInfo.Length}.");
         }
 
-        public void ParseFolder()
-        {
 
-            string[] files = Directory.GetFiles(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName);
+        public string[] ParseFolder(string sourceFolder)
+        {           
             FileCopier fileCopier = new FileCopier();
+            string[] files = Directory.GetFiles(sourceFolder);
 
-
-            Parallel.ForEach(files, (currentFile) =>
+            Parallel.ForEach(files, (currentFile) => 
             {
                 string fileName = Path.GetFileName(currentFile);
                 Console.WriteLine($"Found file {fileName}..");
                 Console.WriteLine($"File {fileName} having SHA value {computeSHA(fileName)}");               
             });
+
+            return files;
         }
 
         public bool verifySHA(string sourceFileSHA, string destinationFileSHA)
