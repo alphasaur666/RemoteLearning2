@@ -17,7 +17,7 @@ namespace TaskHomework
         private async Task MoveAsync(string sourceDirectory, string destinationDirectory)
         {
             Targeter targeter = new Targeter();
-            targeter.ParseFolder(sourceDirectory);
+            targeter.FolderFilesInformation(sourceDirectory);
             Parallel.ForEach(Directory.EnumerateFiles(sourceDirectory), async filename =>
             {               
                 string sourceFileSHA = targeter.ComputeSHA(filename);

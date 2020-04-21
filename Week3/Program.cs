@@ -11,8 +11,12 @@ namespace TaskHomework
         {
             Targeter target = new Targeter();
             FileCopier copier = new FileCopier();
-            string sourceFolder = @"C:\Users\Razvan\source\repos\TaskHomework\TaskHomework\Folder1";
-            string destinationFolder = @"C:\Users\Razvan\source\repos\TaskHomework\TaskHomework\Folder2";
+            Console.WriteLine("Give target folder..");
+            string sourceFolder = Console.ReadLine();
+            Console.WriteLine("Give destination folder..");
+            string destinationFolder = Console.ReadLine();
+            //"C:\Users\Razvan\source\repos\TaskHomework\TaskHomework\Folder1"
+            //"C:\Users\Razvan\source\repos\TaskHomework\TaskHomework\Folder2"
             Task copy = copier.ProcessWriteAsync(sourceFolder, destinationFolder);
             Task.Run(() => copy);
             Task.WaitAll();           

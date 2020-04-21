@@ -42,7 +42,7 @@ namespace TaskHomework
             return files.ToString();
         }
 
-        public void ParseFolder(string sourceFolder)
+        public void FolderFilesInformation(string sourceFolder)
         {           
             FileCopier fileCopier = new FileCopier();
             Parallel.ForEach(Directory.EnumerateFiles(sourceFolder), (currentFile) => 
