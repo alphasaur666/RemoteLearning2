@@ -10,29 +10,7 @@ namespace TaskHomework
 {
     internal class Targeter
     {
- 
-        public async Task<string> ReadTextAsync(string filePath)
-        {
-            using (FileStream sourceStream = new FileStream(filePath,
-                FileMode.Open, FileAccess.Read, FileShare.Read,
-                bufferSize: 4096, useAsync: true))
-            {
-                StringBuilder sb = new StringBuilder();
-
-                byte[] buffer = new byte[0x1000];
-                int numRead;
-                while ((numRead = await sourceStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
-                {
-                    string text = Encoding.Unicode.GetString(buffer, 0, numRead);
-                    sb.Append(text);
-                }
-
-                return sb.ToString();
-            }
-        }
-
-
-        public string computeSHA(string rawData)
+        public string ComputeSHA(string rawData)
         {
             using(SHA256 sha256Hash = SHA256.Create())
             {
@@ -46,43 +24,36 @@ namespace TaskHomework
             }
         }
 
-        public void fileDetails(string fileName)
+        public void FileDetails(string fileName)
         {
             FileInfo fileInfo = new FileInfo(fileName);
-            Console.WriteLine($"File {fileName} has {fileInfo.Length}.");
+            Console.WriteLine($"File {fileName} has {fileInfo.Length} bytes.");
         }
 
 
-        public void fileRankings(string targetDirectory)
+        public string FileRankings(string targetDirectory)
         {
-            var files = Directory.GetFiles(targetDirectory);
-            foreach(var file in files)
+            Console.WriteLine("File rankings from smallest to biggest:");
+            var files = Directory.EnumerateFiles(targetDirectory).Select(f => new FileInfo(f)).OrderBy(f => f.Length);
+            foreach (var file in files)
             {
-                string fileName = Path.GetFileName(file);
-                var fileInfo = new FileInfo(file);
-                var fileSize = fileInfo.Length;
-                var sorted = files.OrderBy(f => new FileInfo(f).Length);
-                Console.WriteLine($"Filename: {fileName}, FileSize: {fileSize}.");
+                Console.WriteLine(file);
             }
-            
+            return files.ToString();
         }
 
-        public string[] ParseFolder(string sourceFolder)
+        public void ParseFolder(string sourceFolder)
         {           
             FileCopier fileCopier = new FileCopier();
-            string[] files = Directory.GetFiles(sourceFolder);
-
-            Parallel.ForEach(files, (currentFile) => 
+            Parallel.ForEach(Directory.EnumerateFiles(sourceFolder), (currentFile) => 
             {
                 string fileName = Path.GetFileName(currentFile);
                 Console.WriteLine($"Found file {fileName}..");
-                Console.WriteLine($"File {fileName} having SHA value {computeSHA(fileName)}");               
-            });
-
-            return files;
+                Console.WriteLine($"File {fileName} having SHA value {ComputeSHA(fileName)}");               
+            });;
         }
 
-        public bool verifySHA(string sourceFileSHA, string destinationFileSHA)
+        public bool VerifySHA(string sourceFileSHA, string destinationFileSHA)
         {
             if(sourceFileSHA == destinationFileSHA)
             {
@@ -95,9 +66,5 @@ namespace TaskHomework
 
             return true;
         }
-
-
     }
-
-
 }

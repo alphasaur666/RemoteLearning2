@@ -14,31 +14,29 @@ namespace TaskHomework
             await MoveAsync(sourceDirectory, destinationDirectory);
         }
 
-        private static async Task MoveAsync(string sourceDirectory, string destinationDirectory)
+        private async Task MoveAsync(string sourceDirectory, string destinationDirectory)
         {
             Targeter targeter = new Targeter();
-            foreach (string dirPath in Directory.GetDirectories(sourceDirectory, "*", SearchOption.AllDirectories))
-                Directory.CreateDirectory(dirPath.Replace(sourceDirectory, destinationDirectory));
-
-            foreach (string filename in Directory.EnumerateFiles(sourceDirectory))
-            {
-                string sourceFileSHA = targeter.computeSHA(filename);
+            targeter.ParseFolder(sourceDirectory);
+            Parallel.ForEach(Directory.EnumerateFiles(sourceDirectory), async filename =>
+            {               
+                string sourceFileSHA = targeter.ComputeSHA(filename);
                 Console.WriteLine($"Started the moving for file {filename}.");
                 using (FileStream sourceStream = File.Open(filename, FileMode.Open))
                 {
-                    using (FileStream destinationStream = File.Create(destinationDirectory+ filename.Substring(filename.LastIndexOf('\\'))))
+                    using (FileStream destinationStream = File.Create(destinationDirectory + filename.Substring(filename.LastIndexOf('\\'))))
                     {
                         Console.WriteLine($"Finished the moving for file {filename}.");
-                        targeter.fileDetails(filename);
-                        string destinationFileSHA = targeter.computeSHA(filename.Substring(filename.LastIndexOf('\\')));
-                        targeter.verifySHA(sourceFileSHA, destinationFileSHA);
+                        targeter.FileDetails(filename);
+                        string destinationFileSHA = targeter.ComputeSHA(filename.Substring(filename.LastIndexOf('\\')));
+                        targeter.VerifySHA(sourceFileSHA, destinationFileSHA);
                         await sourceStream.CopyToAsync(destinationStream);
 
                     }
                 }
-            }
+            });
             Console.WriteLine("Finished. All files are now moved in the new folder.");
-            targeter.fileRankings(destinationDirectory);
+            targeter.FileRankings(destinationDirectory);
         }
 
 
