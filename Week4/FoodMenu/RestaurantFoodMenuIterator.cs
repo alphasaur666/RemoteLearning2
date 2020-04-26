@@ -10,11 +10,9 @@ namespace DesignPatternsApp.FoodMenu
         readonly List<FoodMenuModel> foodItems;
         int postion;
 
-
         public RestaurantFoodMenuIterator(List<FoodMenuModel> foodItems)
         {
             this.foodItems = foodItems;
-
         }
 
         public bool HasNext()

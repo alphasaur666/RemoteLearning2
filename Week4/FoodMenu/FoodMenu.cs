@@ -11,8 +11,6 @@ namespace DesignPatternsApp.FoodMenu
     {
         private readonly string RestaurantID;
 
-
-
         public FoodMenu(string RestaurantID)
         {
             this.RestaurantID = RestaurantID;

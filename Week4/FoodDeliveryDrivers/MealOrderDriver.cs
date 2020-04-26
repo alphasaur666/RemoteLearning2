@@ -34,6 +34,15 @@ namespace DesignPatternsApp.FoodDeliveryDrivers
                 OrderID = orderFood.OrderID;
                 Console.WriteLine(string.Empty);
             }
+            else
+            {
+                if (wantsOrder == 'n')
+                {
+                    Console.WriteLine("Order declined.");
+                    
+                }
+                throw new Exception("Something is wrong!!!");
+            }
 
             //Order Cancellation.
             char cancel = 'n';

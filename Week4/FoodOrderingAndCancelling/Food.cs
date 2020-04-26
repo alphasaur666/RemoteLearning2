@@ -11,7 +11,7 @@ namespace DesignPatternsApp.FoodOrdering
         {
             var orderID = (RestaurantID + Guid.NewGuid().ToString().Substring(0, 15)).ToUpper();
             Console.WriteLine($"Order {orderID}");
-            Console.WriteLine($"Customer Name: {userModel.UserName}");
+            Console.WriteLine($"Customer Name: {userModel.FullName}");
             Console.WriteLine($"Mobile Number: {userModel.PhoneNumber}");
             Console.WriteLine($"Address:  {userModel.Adress}");
             Console.WriteLine($"Amount: {userModel.Amount}");

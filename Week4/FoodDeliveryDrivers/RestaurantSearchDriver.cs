@@ -13,7 +13,7 @@ namespace DesignPatternsApp.FoodDeliveryDrivers
         {
             InterpreterContext context = new InterpreterContext();
             RestaurantSearchClient client = new RestaurantSearchClient(context);
-            Console.WriteLine("Search Restaurant(by Location)");
+            Console.WriteLine("Search Restaurant by location");
             Console.WriteLine("Enter Location:");
             var location = Console.ReadLine();
             string searchSentence = string.Format("restaurant by location '{0}'", location);
@@ -26,7 +26,7 @@ namespace DesignPatternsApp.FoodDeliveryDrivers
             if (result.Any())
             {
                 Console.WriteLine("List of Restaurants");
-                Console.WriteLine("*******************");
+                Console.WriteLine("**********************************");
 
                 foreach (var item in result)
                 {
@@ -46,7 +46,7 @@ namespace DesignPatternsApp.FoodDeliveryDrivers
                 }
 
                 Console.WriteLine();
-                Console.WriteLine("Please select Restaurant by Id: ");
+                Console.WriteLine("Please select the restaurant by ID: ");
                 restaurantID = Console.ReadLine();
             }
             return restaurantID;

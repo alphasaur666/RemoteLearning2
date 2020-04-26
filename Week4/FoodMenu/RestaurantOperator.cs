@@ -39,7 +39,6 @@ namespace DesignPatternsApp.FoodMenu
                 Console.WriteLine($"Cuisine : {foodMenuItem.Cuisine}");
                 Console.WriteLine($"Price : {foodMenuItem.Price}");
                 Console.WriteLine($"Rating : {foodMenuItem.Rating}");
-                Console.WriteLine("*********************************");
 
             }
 

@@ -6,17 +6,17 @@ namespace DesignPatternsApp.Models
 {
     public class UserModel
     {
-        public string UserID { get; set; }
-        public string UserName { get; set; }
+        public string Username { get; set; }
+        public string FullName { get; set; }
         public string PhoneNumber { get; set; }
         public string Adress { get; set; }
         public double Amount { get; set; }
 
 
-        public UserModel(string UserID, string UserName, string PhoneNumber , string Adress, double Amount)
+        public UserModel(string Username, string FullName, string PhoneNumber , string Adress, double Amount)
         {
-            this.UserID = UserID;
-            this.UserName = UserName;
+            this.Username = Username;
+            this.FullName = FullName;
             this.PhoneNumber = PhoneNumber;
             this.Adress = Adress;
             this.Amount = Amount;
@@ -30,19 +30,19 @@ namespace DesignPatternsApp.Models
 
         public UserModel GetUser()
         {
-            string UserID, UserName, PhoneNumber, Adress;
+            string Username, FullName, PhoneNumber, Adress;
 
-            Console.WriteLine("Insert user id:");
-            UserID = Console.ReadLine();
-            Console.WriteLine("Insert user name:");
-            UserName = Console.ReadLine();
+            Console.WriteLine("Insert username:");
+            Username = Console.ReadLine();
+            Console.WriteLine("Insert full name:");
+            FullName = Console.ReadLine();
             Console.WriteLine("Insert phone number:");
             PhoneNumber = Console.ReadLine();
             Console.WriteLine("Insert adress:");
             Adress = Console.ReadLine();
             Amount = 0;
 
-            UserModel generatedUserModel = new UserModel(UserID, UserName , PhoneNumber, Adress, Amount);
+            UserModel generatedUserModel = new UserModel(Username, FullName, PhoneNumber, Adress, Amount);
             return generatedUserModel;
         }
     }
