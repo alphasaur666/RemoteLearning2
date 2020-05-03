@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DesignPatternsApp.FoodDeliveryTaxCalculator
 {
-    class DeliveryTaxCalculator : IDeliveryTaxCalculator
+    public class DeliveryTaxCalculator : IDeliveryTaxCalculator
     {
         public double deliveryTax = 5;
         public double CalculateTax(double price)
