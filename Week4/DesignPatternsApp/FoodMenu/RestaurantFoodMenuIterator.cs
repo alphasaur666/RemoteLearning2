@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DesignPatternsApp.FoodMenu
 {
-    class RestaurantFoodMenuIterator : IIterator
+    public class RestaurantFoodMenuIterator : IIterator
     {
         readonly List<FoodMenuModel> foodItems;
         int postion;

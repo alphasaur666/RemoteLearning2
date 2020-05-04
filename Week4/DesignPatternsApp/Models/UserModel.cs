@@ -45,5 +45,12 @@ namespace DesignPatternsApp.Models
             UserModel generatedUserModel = new UserModel(Username, FullName, PhoneNumber, Adress, Amount);
             return generatedUserModel;
         }
+
+        public UserModel GetUser(string Username, string FullName, string PhoneNumber, string Adress) // for testing purposes
+        {              
+            Amount = 0;
+            UserModel generatedUserModel = new UserModel(Username, FullName, PhoneNumber, Adress, Amount);
+            return generatedUserModel;
+        }
     }
 }

@@ -9,10 +9,6 @@ namespace DesignPatternsApp.FoodDeliveryTaxCalculator
     {
         private readonly IDeliveryTaxCalculator deliveryTaxCalculator;
 
-        public DeliveryTaxCalculationContext()
-        {
-        }
-
         public DeliveryTaxCalculationContext(IDeliveryTaxCalculator deliveryTaxCalculator)
         {
             this.deliveryTaxCalculator = deliveryTaxCalculator;

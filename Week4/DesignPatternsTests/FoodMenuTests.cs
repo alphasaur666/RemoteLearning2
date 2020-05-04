@@ -14,6 +14,7 @@ namespace DesignPatternsTests
         [SetUp]
         public void Setup()
         {
+            //Mocks if i had :)
                   
         }
 
@@ -34,11 +35,20 @@ namespace DesignPatternsTests
 
         }
 
-
-        [TearDown]
-        public void TearDown()
+        [Test]
+        public void CreateFoodMenuIterator_WithValidInput_ReturnsExpectedObject()
         {
+            FoodMenu foodMenu = new FoodMenu("1");
+            var foodMenuIterator = foodMenu.CreateFoodMenuIterator();
+            Assert.IsInstanceOf(typeof(RestaurantFoodMenuIterator), foodMenuIterator);
+        }
 
+        [Test]
+        public void CreateFoodMenuIterator_WithValidInput_ReturnsNotNullableVAlue()
+        {
+            FoodMenu foodMenu = new FoodMenu("1");
+            var foodMenuIterator = foodMenu.CreateFoodMenuIterator();
+            Assert.IsNotNull(foodMenuIterator);
         }
     }
 }

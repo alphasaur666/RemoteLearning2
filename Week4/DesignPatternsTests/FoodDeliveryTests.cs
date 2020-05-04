@@ -11,15 +11,8 @@ namespace DesignPatternsTests
     [TestFixture]
     class FoodDeliveryTests
     {
-        [SetUp]
-        public void SetUp()
-        {
-
-        }
-
-
         [Test]
-        public void GetCalculatedTax_WithValidInput_ReturnsExpectedValue()
+        public void CalculateTax_WithValidInput_ReturnsExpectedValue()
         {
             IDeliveryTaxCalculator deliveryTaxCalculator = new DeliveryTaxCalculator();
             var deliveryTax = deliveryTaxCalculator.CalculateTax(200);
@@ -27,9 +20,15 @@ namespace DesignPatternsTests
 
         }
 
+
+
         [Test]
-        public void 
-
-
+        public void GetCalculatedTax_WithValidInput_ReturnsExpectedType()
+        {
+            IDeliveryTaxCalculator deliveryTaxCalculator = new DeliveryTaxCalculator();
+            DeliveryTaxCalculationContext deliveryTaxContext = new DeliveryTaxCalculationContext(deliveryTaxCalculator);
+            var deliveryTax = deliveryTaxContext.GetCalculatedTax(200);
+            Assert.IsInstanceOf(typeof(double), deliveryTax);
+        }
     }
 }
