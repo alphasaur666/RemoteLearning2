@@ -1,4 +1,5 @@
 using LiveShow.Dal;
+using LiveShow.Dal.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,7 @@ namespace LiveShow.Api
             );
 
             services.AddControllers();
+            //services.AddScoped<Repository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

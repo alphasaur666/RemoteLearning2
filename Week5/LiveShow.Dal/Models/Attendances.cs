@@ -8,5 +8,11 @@ namespace LiveShow.Dal.Models
     {
         public long ShowId { get; set; }
         public long AtendeeID { get; set; }
+        public User Atendee { get; set; }
+        public User Atender { get; set; }
+        public Shows Show { get; set; }
+
+        
+
     }
 }

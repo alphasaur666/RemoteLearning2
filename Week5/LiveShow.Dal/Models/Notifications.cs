@@ -13,6 +13,10 @@ namespace LiveShow.Dal.Models
         public UserType Type { get; set; }
         public DateTime OriginalDateTime { get; set; }
         public string OriginalVenue { get; set; } //fk
-        public long ShowId { get; set; } //fk
+        public long ShowId { get; set; } //fk   f
+
+        
+        
+
     }
 }

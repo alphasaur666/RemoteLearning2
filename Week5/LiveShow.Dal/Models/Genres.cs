@@ -8,5 +8,6 @@ namespace LiveShow.Dal.Models
     {
         public long Id { get; set; }
         public GenreName GenreName { get; set;}
+
     }
 }

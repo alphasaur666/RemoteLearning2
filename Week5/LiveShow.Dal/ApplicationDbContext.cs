@@ -1,5 +1,6 @@
 ﻿using LiveShow.Dal.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace LiveShow.Dal
 {
@@ -22,12 +23,35 @@ namespace LiveShow.Dal
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
 
+        public ApplicationDbContext() : base() { }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             FollowersRelations(modelBuilder);
+            UserNotificationRelations(modelBuilder);
+            AttendancesRelations(modelBuilder);
             base.OnModelCreating(modelBuilder);
         }
 
+
+        private static void UserNotificationRelations(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserNotifications>()
+                .HasKey(c => new { c.UserId, c.NotificationId });
+
+        }
+
+        private static void AttendancesRelations(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Attendances>()
+                .HasKey(c => new { c.ShowId, c.AtendeeID });
+
+            modelBuilder.Entity<User>()
+                .HasMany(c => c.Attendances)
+                .WithOne(f => f.Atendee)
+                .OnDelete(DeleteBehavior.NoAction);
+    
+        }
 
 
         private static void FollowersRelations(ModelBuilder modelBuilder)
@@ -44,6 +68,7 @@ namespace LiveShow.Dal
                 .HasMany(u => u.Followees)
                 .WithOne(f => f.Follower)
                 .OnDelete(DeleteBehavior.NoAction);
+
         }
     }
 }
