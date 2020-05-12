@@ -10,11 +10,11 @@ namespace LiveShow.Dal.UnitOfWork
     {
         private ApplicationDbContext context = new ApplicationDbContext();
         private GenericRepository<User> userRepository;
-        private GenericRepository<Notification> notificationsRepository;
-        private GenericRepository<Show> showsRepository;
-        private GenericRepository<Following> followingsRepository;
-        private GenericRepository<Attendance> attendancesRepository;
-        private GenericRepository<Genre> genresRepository;
+        private GenericRepository<Notification> notificationRepository;
+        private GenericRepository<Show> showRepository;
+        private GenericRepository<Following> followingRepository;
+        private GenericRepository<Attendance> attendanceRepository;
+        private GenericRepository<Genre> genreRepository;
         
 
 
@@ -30,51 +30,51 @@ namespace LiveShow.Dal.UnitOfWork
             }
         }
 
-        public GenericRepository<Notification> NotificationsRepository
+        public GenericRepository<Notification> NotificationRepository
         {
             get
             {
-                if (this.notificationsRepository == null)
+                if (this.notificationRepository == null)
                 {
-                    this.notificationsRepository = new GenericRepository<Notification>(context);
+                    this.notificationRepository = new GenericRepository<Notification>(context);
                 }
-                return notificationsRepository;
+                return notificationRepository;
             }
         }
 
-        public GenericRepository<Show> ShowsRepository
+        public GenericRepository<Show> ShowRepository
         {
             get
             {
-                if (this.showsRepository == null)
+                if (this.showRepository == null)
                 {
-                    this.showsRepository = new GenericRepository<Show>(context);
+                    this.showRepository = new GenericRepository<Show>(context);
                 }
-                return showsRepository;
+                return showRepository;
             }
         }
 
-        public GenericRepository<Following> FollowingsRepository
+        public GenericRepository<Following> FollowingRepository
         {
             get
             {
-                if (this.followingsRepository == null)
+                if (this.followingRepository == null)
                 {
-                    this.followingsRepository = new GenericRepository<Following>(context);
+                    this.followingRepository = new GenericRepository<Following>(context);
                 }
-                return followingsRepository;
+                return followingRepository;
             }
         }
 
-        public GenericRepository<Attendance> AttendancesRepository
+        public GenericRepository<Attendance> AttendanceRepository
         {
             get
             {
-                if (this.attendancesRepository == null)
+                if (this.attendanceRepository == null)
                 {
-                    this.attendancesRepository = new GenericRepository<Attendance>(context);
+                    this.attendanceRepository = new GenericRepository<Attendance>(context);
                 }
-                return attendancesRepository;
+                return attendanceRepository;
             }
         }
 
@@ -82,11 +82,11 @@ namespace LiveShow.Dal.UnitOfWork
         {
             get
             {
-                if (this.genresRepository == null)
+                if (this.genreRepository == null)
                 {
-                    this.genresRepository = new GenericRepository<Genre>(context);
+                    this.genreRepository = new GenericRepository<Genre>(context);
                 }
-                return genresRepository;
+                return genreRepository;
             }
         }
 
