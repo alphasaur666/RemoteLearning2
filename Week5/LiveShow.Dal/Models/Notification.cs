@@ -11,7 +11,7 @@ namespace LiveShow.Dal.Models
         [Required]
         public DateTime DateTime { get; set; }
         [Required]
-        public string Type { get; set; }
+        public NotificationType Type { get; set; }
         public DateTime OriginalDateTime { get; set; }
         public string OriginalVenue { get; set; } //fk
         public long ShowId { get; set; } //fk

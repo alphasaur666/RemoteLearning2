@@ -1,7 +1,7 @@
 ﻿namespace LiveShow.Dal.Models
 {
     // Alternatively, this class could be called Relationship.
-    public class Followings
+    public class Following
     {
         public long FollowerId { get; set; }
 
