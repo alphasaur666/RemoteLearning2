@@ -4,10 +4,10 @@ using System.Text;
 
 namespace LiveShow.Dal.Models
 {
-    public class Genres
+    public enum NotificationType
     {
-        public long Id { get; set; }
-        public GenreName GenreName { get; set;}
-
+        NewShow = 0,
+        UpdatedShow = 1,
+        DeletedShow = 2,
     }
 }

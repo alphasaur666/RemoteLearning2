@@ -8,17 +8,17 @@ namespace LiveShow.Dal
     {
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Followings> Followings { get; set; }
+        public DbSet<Following> Followings { get; set; }
 
-        public DbSet<Attendances> Attendances { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
 
-        public DbSet<Genres> Genres { get; set; }
+        public DbSet<Genre> Genres { get; set; }
 
-        public DbSet<Notifications> Notifications { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
-        public DbSet<Shows> Shows { get; set; }
+        public DbSet<Show> Shows { get; set; }
 
-        public DbSet<UserNotifications> UserNotifications { get; set; }
+        public DbSet<UserNotification> UserNotifications { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
@@ -36,19 +36,19 @@ namespace LiveShow.Dal
 
         private static void UserNotificationRelations(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserNotifications>()
+            modelBuilder.Entity<UserNotification>()
                 .HasKey(c => new { c.UserId, c.NotificationId });
 
         }
 
         private static void AttendancesRelations(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Attendances>()
-                .HasKey(c => new { c.ShowId, c.AtendeeID });
+            modelBuilder.Entity<Attendance>()
+                .HasKey(c => new { c.ShowId, c.AttendeeID });
 
             modelBuilder.Entity<User>()
                 .HasMany(c => c.Attendances)
-                .WithOne(f => f.Atendee)
+                .WithOne(f => f.Attender)
                 .OnDelete(DeleteBehavior.NoAction);
     
         }
@@ -56,7 +56,7 @@ namespace LiveShow.Dal
 
         private static void FollowersRelations(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Followings>()
+            modelBuilder.Entity<Following>()
                 .HasKey(c => new { c.FollowerId, c.FolloweeId });
 
             modelBuilder.Entity<User>()

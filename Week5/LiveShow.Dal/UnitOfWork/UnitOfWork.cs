@@ -10,11 +10,11 @@ namespace LiveShow.Dal.UnitOfWork
     {
         private ApplicationDbContext context = new ApplicationDbContext();
         private GenericRepository<User> userRepository;
-        private GenericRepository<Notifications> notificationsRepository;
-        private GenericRepository<Shows> showsRepository;
-        private GenericRepository<Followings> followingsRepository;
-        private GenericRepository<Attendances> attendancesRepository;
-        private GenericRepository<Genres> genresRepository;
+        private GenericRepository<Notification> notificationsRepository;
+        private GenericRepository<Show> showsRepository;
+        private GenericRepository<Following> followingsRepository;
+        private GenericRepository<Attendance> attendancesRepository;
+        private GenericRepository<Genre> genresRepository;
         
 
 
@@ -30,61 +30,61 @@ namespace LiveShow.Dal.UnitOfWork
             }
         }
 
-        public GenericRepository<Notifications> NotificationsRepository
+        public GenericRepository<Notification> NotificationsRepository
         {
             get
             {
                 if (this.notificationsRepository == null)
                 {
-                    this.notificationsRepository = new GenericRepository<Notifications>(context);
+                    this.notificationsRepository = new GenericRepository<Notification>(context);
                 }
                 return notificationsRepository;
             }
         }
 
-        public GenericRepository<Shows> ShowsRepository
+        public GenericRepository<Show> ShowsRepository
         {
             get
             {
                 if (this.showsRepository == null)
                 {
-                    this.showsRepository = new GenericRepository<Shows>(context);
+                    this.showsRepository = new GenericRepository<Show>(context);
                 }
                 return showsRepository;
             }
         }
 
-        public GenericRepository<Followings> FollowingsRepository
+        public GenericRepository<Following> FollowingsRepository
         {
             get
             {
                 if (this.followingsRepository == null)
                 {
-                    this.followingsRepository = new GenericRepository<Followings>(context);
+                    this.followingsRepository = new GenericRepository<Following>(context);
                 }
                 return followingsRepository;
             }
         }
 
-        public GenericRepository<Attendances> AttendancesRepository
+        public GenericRepository<Attendance> AttendancesRepository
         {
             get
             {
                 if (this.attendancesRepository == null)
                 {
-                    this.attendancesRepository = new GenericRepository<Attendances>(context);
+                    this.attendancesRepository = new GenericRepository<Attendance>(context);
                 }
                 return attendancesRepository;
             }
         }
 
-        public GenericRepository<Genres> GenresRepository
+        public GenericRepository<Genre> GenresRepository
         {
             get
             {
                 if (this.genresRepository == null)
                 {
-                    this.genresRepository = new GenericRepository<Genres>(context);
+                    this.genresRepository = new GenericRepository<Genre>(context);
                 }
                 return genresRepository;
             }

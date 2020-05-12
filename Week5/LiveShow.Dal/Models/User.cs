@@ -18,21 +18,21 @@ namespace LiveShow.Dal.Models
         [Required]
         public UserType Type { get; set; }
 
-        public ICollection<Followings> Followers { get; set; }
+        public ICollection<Following> Followers { get; set; }
 
-        public ICollection<Followings> Followees { get; set; }
+        public ICollection<Following> Followees { get; set; }
 
-        public ICollection<Notifications> Notifications { get; set; }
+        public ICollection<Notification> Notifications { get; set; }
 
-        public ICollection<Attendances> Attendances { get; set; }
+        public ICollection<Attendance> Attendances { get; set; }
 
         
         public User()
         {
-            Followers = new List<Followings>();
-            Followees = new List<Followings>();
-            Notifications = new List<Notifications>();
-            Attendances = new List<Attendances>();
+            Followers = new List<Following>();
+            Followees = new List<Following>();
+            Notifications = new List<Notification>();
+            Attendances = new List<Attendance>();
         }
     }
 }
