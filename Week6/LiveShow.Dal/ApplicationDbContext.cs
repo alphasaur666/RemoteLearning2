@@ -1,6 +1,5 @@
 ﻿using LiveShow.Dal.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace LiveShow.Dal
 {
@@ -16,48 +15,46 @@ namespace LiveShow.Dal
 
         public DbSet<Notification> Notifications { get; set; }
 
+        public DbSet<UserNotification> UserNotifications { get; set; }
+
         public DbSet<Show> Shows { get; set; }
 
-        public DbSet<UserNotification> UserNotifications { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
 
-        public ApplicationDbContext() : base() { }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             FollowersRelations(modelBuilder);
-            UserNotificationRelations(modelBuilder);
+
             AttendancesRelations(modelBuilder);
+
+            UserNotificationsRelations(modelBuilder);
+
             base.OnModelCreating(modelBuilder);
         }
 
-
-        private static void UserNotificationRelations(ModelBuilder modelBuilder)
+        private static void UserNotificationsRelations(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserNotification>()
-                .HasKey(c => new { c.UserId, c.NotificationId });
+                .HasKey(c => new {c.UserId, c.NotificationId});
 
             modelBuilder.Entity<UserNotification>()
                 .HasOne(n => n.User)
                 .WithMany(u => u.UserNotifications)
                 .OnDelete(DeleteBehavior.NoAction);
-
         }
 
         private static void AttendancesRelations(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Attendance>()
-                .HasKey(c => new { c.ShowId, c.AttendeeID });
+                .HasKey(c => new {c.ShowId, c.AttendeeId});
 
             modelBuilder.Entity<Attendance>()
-                .HasOne(x => x.Show)
-                .WithMany(y => y.Attendances)
+                .HasOne(a => a.Show)
+                .WithMany(g => g.Attendances)
                 .OnDelete(DeleteBehavior.NoAction);
-    
         }
-
 
         private static void FollowersRelations(ModelBuilder modelBuilder)
         {
@@ -73,7 +70,6 @@ namespace LiveShow.Dal
                 .HasMany(u => u.Followees)
                 .WithOne(f => f.Follower)
                 .OnDelete(DeleteBehavior.NoAction);
-
         }
     }
 }
