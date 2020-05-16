@@ -9,7 +9,7 @@ namespace LiveShow.Dal.Models
         public long ShowId { get; set; }
         public long AttendeeID { get; set; }
 
-        public User Attender { get; set; }
+        public User Attendee { get; set; }
         public Show Show { get; set; }
 
         

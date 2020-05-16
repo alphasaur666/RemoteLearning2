@@ -6,8 +6,8 @@ namespace LiveShow.Dal.Models
 {
     public enum NotificationType
     {
-        Canceled = 0,
-        Updated = 1,
-        Created = 2
+        Canceled = 1,
+        Updated = 2,
+        Created = 3
     }
 }

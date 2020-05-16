@@ -39,6 +39,11 @@ namespace LiveShow.Dal
             modelBuilder.Entity<UserNotification>()
                 .HasKey(c => new { c.UserId, c.NotificationId });
 
+            modelBuilder.Entity<UserNotification>()
+                .HasOne(n => n.User)
+                .WithMany(u => u.UserNotifications)
+                .OnDelete(DeleteBehavior.NoAction);
+
         }
 
         private static void AttendancesRelations(ModelBuilder modelBuilder)
@@ -46,9 +51,9 @@ namespace LiveShow.Dal
             modelBuilder.Entity<Attendance>()
                 .HasKey(c => new { c.ShowId, c.AttendeeID });
 
-            modelBuilder.Entity<User>()
-                .HasMany(c => c.Attendances)
-                .WithOne(f => f.Attender)
+            modelBuilder.Entity<Attendance>()
+                .HasOne(x => x.Show)
+                .WithMany(y => y.Attendance)
                 .OnDelete(DeleteBehavior.NoAction);
     
         }

@@ -22,17 +22,14 @@ namespace LiveShow.Dal.Models
 
         public ICollection<Following> Followees { get; set; }
 
-        public ICollection<Notification> Notifications { get; set; }
-
-        public ICollection<Attendance> Attendances { get; set; }
+        public ICollection<UserNotification> UserNotifications { get; set; }
 
         
         public User()
         {
             Followers = new List<Following>();
             Followees = new List<Following>();
-            Notifications = new List<Notification>();
-            Attendances = new List<Attendance>();
+            UserNotifications = new List<UserNotification>();
         }
     }
 }

@@ -14,10 +14,18 @@ namespace LiveShow.Dal.Models
         public NotificationType Type { get; set; }
         public DateTime OriginalDateTime { get; set; }
         public string OriginalVenue { get; set; } //fk
+
         public long ShowId { get; set; } //fk
 
-
+        [Required]
         public Show Show { get; set; }
+
+        public Notification(NotificationType notificationType, Show show)
+        {
+            notificationType = Type;
+            Show = show ?? throw new ArgumentNullException(nameof(Show));
+            DateTime = DateTime.Now;
+        }
 
         
         
