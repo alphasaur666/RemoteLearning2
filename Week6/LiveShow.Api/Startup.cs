@@ -1,8 +1,10 @@
+using AutoMapper;
 using LiveShow.Dal;
 using LiveShow.Services;
 using LiveShow.Services.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,14 +29,20 @@ namespace LiveShow.Api
                     Configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly($"LiveShow.Dal"))
             );
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            
 
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IAttendanceService, AttendanceService>();
+            services.AddScoped<IFollowerService, FollowerService>();
+            services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IShowService, ShowService>();
 
             services.AddControllers();
+            services.AddAutoMapper(typeof(Startup));
 
-            services.AddApiVersioning(options => options.ReportApiVersions = true);
+            services.AddApiVersioning(options => options.ReportApiVersions = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +52,10 @@ namespace LiveShow.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseHsts();
+            }
 
             app.UseRouting();
 
@@ -51,6 +63,9 @@ namespace LiveShow.Api
             {
                 endpoints.MapControllers();
             });
+
+            app.UseHttpsRedirection();
+
         }
     }
 }

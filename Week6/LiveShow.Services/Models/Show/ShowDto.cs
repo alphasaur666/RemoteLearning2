@@ -17,6 +17,6 @@ namespace LiveShow.Services.Models.Show
 
         public GenreDto Genre { get; set; }
 
-        public byte GenreId { get; set; }
+        public int GenreId { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace LiveShow.Dal
         Task AddAsync(params T[] entities);
         Task DeleteAsync(params T[] entities);
         IAsyncEnumerable<T> GetAll(Expression<Func<T, bool>> predicate);
+        IAsyncEnumerable<T> GetAll();
         Task<T> GetAsync(Expression<Func<T, bool>> predicate);
         Task UpdateAsync(params T[] entities);
     }

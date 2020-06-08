@@ -29,6 +29,11 @@ namespace LiveShow.Dal
             return dbSet.Where(predicate).AsAsyncEnumerable();
         }
 
+        public IAsyncEnumerable<T> GetAll()
+        {
+            return dbSet.AsAsyncEnumerable();
+        }
+
         public async Task AddAsync(params T[] entities)
         {
             await dbSet.AddRangeAsync(entities);

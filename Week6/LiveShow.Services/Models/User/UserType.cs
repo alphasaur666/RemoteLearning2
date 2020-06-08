@@ -3,6 +3,6 @@
     public enum UserTypeEnum
     {
         Regular = 0,
-        Artist = 1
+        Artist = 1,
     }
 }

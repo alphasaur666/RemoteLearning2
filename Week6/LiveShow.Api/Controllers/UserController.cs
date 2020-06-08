@@ -1,11 +1,15 @@
 ﻿using LiveShow.Services;
+using LiveShow.Services.Models.Show;
 using LiveShow.Services.Models.User;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiveShow.Api.Controllers
 {
+    [Route("api/user")]
+    [ApiController]
     public class UserController : LiveShowApiControllerBase
     {
+        
         private readonly IUserService userService;
 
         public UserController(IUserService userService)
@@ -16,27 +20,29 @@ namespace LiveShow.Api.Controllers
         [HttpPost("login")]
         public IActionResult Login(UserLoginDto userLogin)
         {
-            LoggedInUserDto loggedInUser = userService.Login(userLogin);
-
+            var loggedInUser = userService.Login(userLogin);
             return Ok(loggedInUser);
         }
 
         [HttpGet("logout")]
-        public IActionResult Logout()
+        public IActionResult Logout(int userID)
         {
-            return Ok("logout");
+            userService.Logout(userID);
+            return Ok("Logged out!");
         }
 
-        [HttpGet]
-        public IActionResult Profile()
+        [HttpGet("{userId}")]
+        public IActionResult Profile(int userId)
         {
-            return Ok("profile");
+            var userProfile = userService.GetUser(userId);
+            return Ok(userProfile);
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public IActionResult Register(UserDto user)
         {
-            return Created(Url.Action("Profile"), user);
+            var registerdUser = userService.RegisterUser(user);
+            return Created(Url.Action("Profile: "), registerdUser);
         }
 
         [HttpPatch]
@@ -44,5 +50,6 @@ namespace LiveShow.Api.Controllers
         {
             return Ok(user);
         }
+        
     }
 }

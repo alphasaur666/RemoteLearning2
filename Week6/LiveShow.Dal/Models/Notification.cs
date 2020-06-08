@@ -14,8 +14,7 @@ namespace LiveShow.Dal.Models
         public DateTime? OriginalDateTime { get; private set; }
 
         public string OriginalVenue { get; private set; }
-
-        [Required]
+    
         public Show Show { get; private set; }
 
         public Notification(NotificationType type, Show show)
@@ -23,6 +22,10 @@ namespace LiveShow.Dal.Models
             Type = type;
             Show = show ?? throw new ArgumentNullException(nameof(show));
             DateTime = DateTime.Now;
+        }
+        public Notification()
+        {
+
         }
     }
 }
