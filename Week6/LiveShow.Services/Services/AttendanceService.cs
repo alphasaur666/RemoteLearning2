@@ -48,7 +48,7 @@ namespace LiveShow.Services.Services
 
             var updatedAttendance = mapper.Map<Attendance>(updatedAttendanceDto);
             await unitOfWork.AttendanceRepository.DeleteAsync(updatedAttendance);
-
+            
             var returnedRemovedShow = mapper.Map<AttendanceDto>(updatedAttendance);
             return returnedRemovedShow;                      
         }

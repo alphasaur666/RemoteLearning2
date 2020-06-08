@@ -44,7 +44,6 @@ namespace LiveShow.Services.Services
 
             var returnedUser = mapper.Map<UserDto>(createdUser);
             return returnedUser;
-
         }
 
         public async Task<UserDto> GetUser(int userId)

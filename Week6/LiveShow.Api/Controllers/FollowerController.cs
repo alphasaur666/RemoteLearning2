@@ -10,8 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LiveShow.Api.Controllers
 {
-    [Route("api/followings")]
-    [ApiController]
     public class FollowerController : LiveShowApiControllerBase
     {
         
@@ -22,14 +20,14 @@ namespace LiveShow.Api.Controllers
             this.followerService = followerService;
         }
 
-        [HttpPost("Follow")]
+        [HttpPost]
         public IActionResult Follow(FollowerDto follower)
         {
             var followerTask = followerService.AddFollower(follower);          
             return Ok(followerTask);
         }
 
-        [HttpDelete("Unfollow")]
+        [HttpDelete]
         public IActionResult Unfollow(FollowerDto follower)
         {
             var unfollowTask = followerService.RemoveFollower(follower);

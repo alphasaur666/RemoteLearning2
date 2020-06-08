@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LiveShow.Api.Controllers
 {
-    [Route("api/user")]
-    [ApiController]
     public class UserController : LiveShowApiControllerBase
     {
         
@@ -42,7 +40,7 @@ namespace LiveShow.Api.Controllers
         public IActionResult Register(UserDto user)
         {
             var registerdUser = userService.RegisterUser(user);
-            return Created(Url.Action("Profile: "), registerdUser);
+            return Ok(registerdUser);
         }
 
         [HttpPatch]

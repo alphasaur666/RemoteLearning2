@@ -12,8 +12,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LiveShow.Api.Controllers
 {
-    [Route("api/attendance")]
-    [ApiController]
     public class AttendanceController : LiveShowApiControllerBase
     {
         

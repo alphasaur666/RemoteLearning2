@@ -38,9 +38,12 @@ namespace LiveShow.Api
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IShowService, ShowService>();
-
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 
             services.AddApiVersioning(options => options.ReportApiVersions = false);
         }

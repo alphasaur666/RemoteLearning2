@@ -9,6 +9,14 @@ namespace LiveShow.Dal.Models
 
         [MaxLength(100)]
         [Required]
+        public string Username { get; set; }
+
+        [MaxLength(100)]
+        [Required]
+        public string Password { get; set; }
+
+        [MaxLength(100)]
+        [Required]
         public string FirstName { get; set; }
 
         [MaxLength(100)]

@@ -6,8 +6,6 @@ using System;
 
 namespace LiveShow.Api.Controllers
 {
-    [Route("api/show")]
-    [ApiController]
     public class ShowController : LiveShowApiControllerBase
     {
         

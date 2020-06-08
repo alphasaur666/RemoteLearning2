@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LiveShow.Api.Controllers
 {
-    [Route("api/notifications")]
     [ApiController]
     public class NotificationController : LiveShowApiControllerBase
     {
