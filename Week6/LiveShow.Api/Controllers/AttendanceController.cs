@@ -24,21 +24,18 @@ namespace LiveShow.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult AttendShow(AttendanceDto attendance, int showiD)
+        public async Task<IActionResult> AttendShow(AttendanceDto attendance, int showiD)
         {
-            var updatedAttendance = attendanceService.AttendShow(attendance, showiD);
+            var updatedAttendance = await attendanceService.AttendShow(attendance, showiD);
             return Ok(updatedAttendance);
         }
 
         [HttpPatch]
-        public IActionResult UnattendShow(AttendanceDto attendance, int showiD)
+        public async Task<IActionResult> UnattendShow(AttendanceDto attendance, int showiD)
         {
-           var updatedAttendance = attendanceService.UnattendShow(attendance, showiD);
+           var updatedAttendance = await attendanceService.UnattendShow(attendance, showiD);
            return Ok(updatedAttendance);
                    
-        }
-        
-        
-
+        }    
     }
 }

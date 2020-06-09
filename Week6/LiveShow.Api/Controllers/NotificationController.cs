@@ -12,8 +12,6 @@ namespace LiveShow.Api.Controllers
     [ApiController]
     public class NotificationController : LiveShowApiControllerBase
     {
-        
-        
         private readonly INotificationService notificationService;
 
         public NotificationController(INotificationService notificationService)
@@ -22,9 +20,9 @@ namespace LiveShow.Api.Controllers
         }
         
         [HttpGet("{notificationId}")]
-        public IActionResult GetNotification(NotificationDto notificationDto, int notificationId)
+        public async Task<IActionResult> GetNotification(NotificationDto notificationDto, int notificationId)
         {
-            var Notification = notificationService.GetNotification(notificationId);
+            var Notification = await notificationService.GetNotification(notificationId);
             return Ok(Notification);
         }
         

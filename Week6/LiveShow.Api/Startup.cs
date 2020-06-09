@@ -38,6 +38,7 @@ namespace LiveShow.Api
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IShowService, ShowService>();
+            services.AddScoped<IGenreService, GenreService>();
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
 

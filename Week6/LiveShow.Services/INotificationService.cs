@@ -10,6 +10,7 @@ namespace LiveShow.Services
     {
         Task<NotificationDto> GetNotification(int NotificationId);
         IEnumerable<NotificationDto> GetAllNotifications();
+        Task<NotificationDto> CreateNotification(NotificationDto notification);
 
     }
 }

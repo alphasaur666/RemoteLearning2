@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace LiveShow.Services
 {
-    interface IGenreService
+    public interface IGenreService
     {
         Task<GenreDto> CreateGenre(GenreDto genre);
         IEnumerable<GenreDto> GetAllGenres();
         Task<GenreDto> DeleteGenre(GenreDto genre);
+        Task<GenreDto> UpdateGenre(GenreDto genre);
     }
 }

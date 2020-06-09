@@ -1,0 +1,49 @@
+﻿@model List<LiveShow.Services.Models.Show.ShowDto>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Shows on LiveShow</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().IsCanceled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Venue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().DateTime)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsCanceled)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Venue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

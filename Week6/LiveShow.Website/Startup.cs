@@ -23,6 +23,8 @@ namespace LiveShow.Website
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddApiVersioning();
+            services.AddHttpClient<IApiService, ApiService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,11 +44,17 @@ namespace LiveShow.Website
 
             app.UseAuthorization();
 
+ 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "users",
+                    pattern: "{controller=Home}/{action=Index}/");
             });
         }
     }

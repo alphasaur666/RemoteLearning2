@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LiveShow.Services.Services
 {
-    class GenreService : IGenreService
+    public class GenreService : IGenreService
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
@@ -35,6 +35,16 @@ namespace LiveShow.Services.Services
             var genres = unitOfWork.GenreRepository.GetAll();
             var genreDtos = mapper.Map<IEnumerable<GenreDto>>(genres);
             return genreDtos;
+        }
+
+        public async Task<GenreDto> UpdateGenre(GenreDto genre)
+        {
+            var updatedGenre = mapper.Map<Genre>(genre);
+            await unitOfWork.GenreRepository.UpdateAsync(updatedGenre);
+
+            var updatedGenreDto = mapper.Map<GenreDto>(updatedGenre);
+            return updatedGenreDto;
+
         }
 
         public async Task<GenreDto> DeleteGenre(GenreDto genre)

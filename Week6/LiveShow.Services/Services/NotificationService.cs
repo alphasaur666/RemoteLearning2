@@ -32,6 +32,16 @@ namespace LiveShow.Services.Services
             var notifications = unitOfWork.NotificationRepository.GetAll();
             var notificationsDto = mapper.Map<IEnumerable<NotificationDto>>(notifications);
             return notificationsDto;
-        }   
+        }
+        
+        public async Task<NotificationDto> CreateNotification(NotificationDto notification)
+        {
+            var creadtedNotification = mapper.Map<Notification>(notification);
+            await unitOfWork.NotificationRepository.AddAsync(creadtedNotification);
+
+            var createdNotificationDto = mapper.Map<NotificationDto>(creadtedNotification);
+            return createdNotificationDto;
+
+        }
     }
 }

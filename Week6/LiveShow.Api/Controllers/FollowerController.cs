@@ -21,16 +21,16 @@ namespace LiveShow.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Follow(FollowerDto follower)
+        public async Task<IActionResult> Follow(FollowerDto follower)
         {
-            var followerTask = followerService.AddFollower(follower);          
+            var followerTask = await followerService.AddFollower(follower);          
             return Ok(followerTask);
         }
 
         [HttpDelete]
-        public IActionResult Unfollow(FollowerDto follower)
+        public async Task<IActionResult> Unfollow(FollowerDto follower)
         {
-            var unfollowTask = followerService.RemoveFollower(follower);
+            var unfollowTask = await followerService.RemoveFollower(follower);
             return Ok(unfollowTask);
         }
         

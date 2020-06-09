@@ -2,6 +2,7 @@
 using LiveShow.Services.Models.Show;
 using LiveShow.Services.Models.User;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace LiveShow.Api.Controllers
 {
@@ -30,23 +31,31 @@ namespace LiveShow.Api.Controllers
         }
 
         [HttpGet("{userId}")]
-        public IActionResult Profile(int userId)
+        public async Task<IActionResult> Profile(int userId)
         {
-            var userProfile = userService.GetUser(userId);
+            var userProfile = await userService.GetUser(userId);
             return Ok(userProfile);
         }
 
-        [HttpPost("register")]
-        public IActionResult Register(UserDto user)
+        [HttpGet("artists")]
+        public IActionResult GetArtists()
         {
-            var registerdUser = userService.RegisterUser(user);
+            var artists = userService.GetArtists();
+            return Ok(artists);
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(UserDto user)
+        {
+            var registerdUser = await userService.RegisterUser(user);
             return Ok(registerdUser);
         }
 
         [HttpPatch]
-        public IActionResult UpdateProfile(UserDto user)
+        public async Task<IActionResult> UpdateProfile(UserDto user)
         {
-            return Ok(user);
+            var updatedUser = await userService.UpdateUser(user);
+            return Ok(updatedUser);
         }
         
     }

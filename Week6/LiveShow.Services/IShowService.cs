@@ -14,5 +14,9 @@ namespace LiveShow.Services
         Task<ShowDto> AddShow(ShowDto show);
         Task<ShowDto> DeleteShow(ShowDto show);
         Task<ShowDto> UpdateShow(ShowDto show);
+        IEnumerable<ShowDto> GetAllShowsByArtist(UserDto artist);
+        IEnumerable<ShowDto> GetAllShowsByVenue(string Venue);
+
+
     }
 }

@@ -60,6 +60,22 @@ namespace LiveShow.Services.Services
             return usersDto;
         }
 
+        public IEnumerable<UserDto> GetArtists()
+        {
+            var artists = unitOfWork.UserRepository.GetAll(u => u.Type == UserType.Artist);
+            var artistsDto = mapper.Map<IEnumerable<UserDto>>(artists);
+            return artistsDto;
+        }
+
+        public async Task<UserDto> UpdateUser(UserDto user)
+        {
+            var userToUpdate = mapper.Map<User>(user);
+            await unitOfWork.UserRepository.UpdateAsync(userToUpdate);
+
+            var returnedUpdatedUser = mapper.Map<UserDto>(userToUpdate);
+            return returnedUpdatedUser;
+        }
+
     }
 }
 

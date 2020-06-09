@@ -1,14 +1,17 @@
-﻿using LiveShow.Services;
+﻿using LiveShow.Dal;
+using LiveShow.Dal.Models;
+using LiveShow.Services;
 using LiveShow.Services.Models.Show;
 using LiveShow.Services.Models.User;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace LiveShow.Api.Controllers
 {
     public class ShowController : LiveShowApiControllerBase
     {
-        
+
         private readonly IShowService showService;
 
         public ShowController(IShowService showService)
@@ -17,39 +20,53 @@ namespace LiveShow.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var show = showService.GetShow(id);
+            var show = await showService.GetShow(id);
             return Ok(show);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllShows()
+        {
+            var shows = showService.GetAllShows();
+            return Ok(shows);
+        }
+
+        [HttpGet("ByArtist")]
+        public IActionResult GetAllShowsByArtist(UserDto artist)
+        {
+            var showsByArtist = showService.GetAllShowsByArtist(artist);
+            return Ok(showsByArtist);
+        }
+
+        [HttpGet("ByVenue")]
+        public IActionResult GetAllShowsByVenue(string venue)
+        {
+            var showsByVenue = showService.GetAllShowsByVenue(venue);
+            return Ok(showsByVenue);
         }
 
         [HttpPost]
-        public IActionResult AddShow(ShowDto show)
+        public async Task<IActionResult> AddShow(ShowDto show)
         {
-            var Show = showService.AddShow(show);
-            if (Show != null)
-            {
-                return Created(Url.Action("Show"), show);
-            }
-            else
-            {
-                return Unauthorized("Your account can't do that!");
-            }
-            
+            var Show = await showService.AddShow(show);
+            return Created(Url.Action("Show"), show);
+
         }
 
         [HttpPatch]
-        public IActionResult UpdateShow(ShowDto show)
+        public async Task<IActionResult> UpdateShow(ShowDto show)
         {
-            var updatedShow = showService.UpdateShow(show);
+            var updatedShow = await showService.UpdateShow(show);
             return Ok(show);
         }
 
-        [HttpDelete]
-        public IActionResult DeleteShow(ShowDto show)
+        [HttpDelete("id")]
+        public async Task<IActionResult> DeleteShow(ShowDto show)
         {
-            var deletedShow = showService.DeleteShow(show);
-            return Ok("Deleted show!");           
+            var deletedShow = await showService.DeleteShow(show);
+            return Ok(deletedShow);      
         }
         
        

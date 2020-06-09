@@ -1,4 +1,5 @@
-﻿using LiveShow.Services.Models.User;
+﻿using LiveShow.Dal.Models;
+using LiveShow.Services.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace LiveShow.Services
         Task<UserDto> RegisterUser(UserDto user);
         Task<UserDto> GetUser(int userId);
         IEnumerable<UserDto> GetAllUsers();
+        Task<UserDto> UpdateUser(UserDto user);
+        IEnumerable<UserDto> GetArtists();
 
 
     }
