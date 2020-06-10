@@ -11,8 +11,8 @@ namespace LiveShow.Services
 {
     public interface IAttendanceService
     {
-        Task<AttendanceDto> AttendShow(AttendanceDto attendance, int showId);
-        Task<AttendanceDto> UnattendShow(AttendanceDto attendance, int showId);
+        Task<AttendanceDto> AttendShow(int showId);
+        Task<AttendanceDto> UnattendShow(int showId);
 
     }
 }

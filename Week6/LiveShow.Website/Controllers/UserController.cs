@@ -31,5 +31,17 @@ namespace LiveShow.Website.Controllers
             var result = await service.GetArtists();
             return View(result);
         }
+
+        /*public async Task<IActionResult> Register()
+        {
+            var result = await service.RegisterUser();
+            return View(result);
+        }*/
+
+        public async Task<IActionResult> Login(UserDto user)
+        {
+            var result = await service.Login(user);
+            return View(result);
+        }
     }
 }

@@ -54,7 +54,6 @@ namespace LiveShow.Services.Services
         {
             var addedShow = mapper.Map<Show>(show);
             await unitOfWork.ShowRepository.AddAsync(addedShow);
-
             var returnedShow = mapper.Map<ShowDto>(addedShow);
             return returnedShow;
 
@@ -70,13 +69,11 @@ namespace LiveShow.Services.Services
         }
 
         
-        public async Task<ShowDto> DeleteShow(ShowDto show)
+        public async Task<ShowDto> DeleteShow(int showId)
         {
-            var deletedShow = mapper.Map<Show>(show);
-            await unitOfWork.ShowRepository.DeleteAsync(deletedShow);
-
-
-            var returnedDeletedShow = mapper.Map<ShowDto>(deletedShow);
+            var show = await unitOfWork.ShowRepository.GetAsync(s => s.Id == showId);
+            await unitOfWork.ShowRepository.DeleteAsync(show);
+            var returnedDeletedShow = mapper.Map<ShowDto>(show);
             return returnedDeletedShow;
         }
     }

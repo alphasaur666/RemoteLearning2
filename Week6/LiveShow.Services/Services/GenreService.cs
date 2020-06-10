@@ -47,8 +47,9 @@ namespace LiveShow.Services.Services
 
         }
 
-        public async Task<GenreDto> DeleteGenre(GenreDto genre)
+        public async Task<GenreDto> DeleteGenre(int genreId)
         {
+            var genre = unitOfWork.GenreRepository.GetAsync(g => g.Id == genreId);
             var deletedGenre = mapper.Map<Genre>(genre);
             await unitOfWork.GenreRepository.DeleteAsync(deletedGenre);
 

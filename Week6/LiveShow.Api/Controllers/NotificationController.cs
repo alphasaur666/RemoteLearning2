@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveShow.Services;
@@ -20,11 +21,27 @@ namespace LiveShow.Api.Controllers
         }
         
         [HttpGet("{notificationId}")]
-        public async Task<IActionResult> GetNotification(NotificationDto notificationDto, int notificationId)
+        public async Task<IActionResult> GetNotification(int notificationId)
         {
             var Notification = await notificationService.GetNotification(notificationId);
             return Ok(Notification);
         }
+
+        [HttpGet]
+        public IActionResult GetAllNotifications()
+        {
+            var notifications = notificationService.GetAllNotifications();
+            return Ok(notifications);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateNotification(NotificationDto notificationDto)
+        {
+            var creteadNotification = await notificationService.CreateNotification(notificationDto);
+            return Ok(creteadNotification);
+
+        }
+
         
 
 

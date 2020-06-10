@@ -62,10 +62,10 @@ namespace LiveShow.Api.Controllers
             return Ok(show);
         }
 
-        [HttpDelete("id")]
-        public async Task<IActionResult> DeleteShow(ShowDto show)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteShow(int id)
         {
-            var deletedShow = await showService.DeleteShow(show);
+            var deletedShow = await showService.DeleteShow(id);
             return Ok(deletedShow);      
         }
         

@@ -1,7 +1,10 @@
 ﻿using LiveShow.Services;
 using LiveShow.Services.Models.Show;
 using LiveShow.Services.Models.User;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace LiveShow.Api.Controllers
@@ -17,17 +20,27 @@ namespace LiveShow.Api.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login(UserLoginDto userLogin)
+        public IActionResult Login(UserDto userDto)
         {
-            var loggedInUser = userService.Login(userLogin);
-            return Ok(loggedInUser);
+            if (!string.IsNullOrEmpty(userDto.Username) && string.IsNullOrEmpty(userDto.Password))
+            {
+                return RedirectToAction("Login");
+            }
+
+            var identity = userService.Login(userDto);
+
+             
+            var principal = new ClaimsPrincipal(identity);
+            var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+            return Ok(login); 
         }
 
         [HttpGet("logout")]
         public IActionResult Logout(int userID)
         {
-            userService.Logout(userID);
-            return Ok("Logged out!");
+            var logout = HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Ok(logout);
         }
 
         [HttpGet("{userId}")]

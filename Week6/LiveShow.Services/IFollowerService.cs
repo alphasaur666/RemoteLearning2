@@ -10,6 +10,6 @@ namespace LiveShow.Services
     public interface IFollowerService
     {
         Task<FollowerDto> AddFollower(FollowerDto follower);
-        Task<FollowerDto> RemoveFollower(FollowerDto removedFollower);
+        Task<FollowerDto> RemoveFollower(int FollowerId);
     }
 }

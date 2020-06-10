@@ -44,8 +44,9 @@ namespace LiveShow.Services.Services
             return followersDto;
         }
 
-        public async Task<FollowerDto> RemoveFollower(FollowerDto removedFollower) //for unfollow
+        public async Task<FollowerDto> RemoveFollower(int FollowerId) //for unfollow
         {
+            var removedFollower = unitOfWork.FollowingRepository.GetAsync(u => u.FollowerId == FollowerId);
             var removedFollowerDto = mapper.Map<Following>(removedFollower);
             await unitOfWork.FollowingRepository.DeleteAsync(removedFollowerDto);
 

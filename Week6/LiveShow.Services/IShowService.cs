@@ -12,7 +12,7 @@ namespace LiveShow.Services
         Task<ShowDto> GetShow(int showId);
         IEnumerable<ShowDto> GetAllShows();
         Task<ShowDto> AddShow(ShowDto show);
-        Task<ShowDto> DeleteShow(ShowDto show);
+        Task<ShowDto> DeleteShow(int showId);
         Task<ShowDto> UpdateShow(ShowDto show);
         IEnumerable<ShowDto> GetAllShowsByArtist(UserDto artist);
         IEnumerable<ShowDto> GetAllShowsByVenue(string Venue);

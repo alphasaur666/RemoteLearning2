@@ -12,7 +12,7 @@ namespace LiveShow.Api.Controllers
 {
     public class FollowerController : LiveShowApiControllerBase
     {
-        
+
         public IFollowerService followerService;
 
         public FollowerController(IFollowerService followerService)
@@ -23,14 +23,14 @@ namespace LiveShow.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Follow(FollowerDto follower)
         {
-            var followerTask = await followerService.AddFollower(follower);          
+            var followerTask = await followerService.AddFollower(follower);
             return Ok(followerTask);
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Unfollow(FollowerDto follower)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Unfollow(int id)
         {
-            var unfollowTask = await followerService.RemoveFollower(follower);
+            var unfollowTask = await followerService.RemoveFollower(id);
             return Ok(unfollowTask);
         }
         

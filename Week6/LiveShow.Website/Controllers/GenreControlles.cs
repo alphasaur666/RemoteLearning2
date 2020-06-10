@@ -22,5 +22,10 @@ namespace LiveShow.Website.Controllers
             var result = await api.GetGenres();
             return View(result);
         }
+        /*public async Task<IActionResult> AddGenre()
+        {
+            var result = await api.AddGenre()
+            return View(result);
+        }*/
     }
 }

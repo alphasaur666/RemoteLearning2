@@ -10,7 +10,7 @@ namespace LiveShow.Services
     {
         Task<GenreDto> CreateGenre(GenreDto genre);
         IEnumerable<GenreDto> GetAllGenres();
-        Task<GenreDto> DeleteGenre(GenreDto genre);
+        Task<GenreDto> DeleteGenre(int genreId);
         Task<GenreDto> UpdateGenre(GenreDto genre);
     }
 }

@@ -4,9 +4,12 @@ using LiveShow.Dal.Models;
 using LiveShow.Services.Models.Attendance;
 using LiveShow.Services.Models.Followers;
 using LiveShow.Services.Models.User;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace LiveShow.Services.Services
@@ -22,19 +25,15 @@ namespace LiveShow.Services.Services
             this.mapper = mapper;
         }
 
-        public LoggedInUserDto Login(UserLoginDto userLogin)
+        public ClaimsIdentity Login(UserDto user)
         {
-            LoggedInUserDto loggedInUser = new LoggedInUserDto
+            var identity = new ClaimsIdentity(new[]
             {
-                SessionId = Guid.NewGuid()
-            };
-            return loggedInUser;
-        }
+             new Claim(ClaimTypes.Name, user.Username)
+            },
+            CookieAuthenticationDefaults.AuthenticationScheme);
 
-        public void Logout(int userID)
-        {
-            
-            // do the logout
+            return identity;
         }
 
         public async Task<UserDto> RegisterUser(UserDto user)

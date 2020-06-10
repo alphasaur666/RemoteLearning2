@@ -22,31 +22,20 @@ namespace LiveShow.Services.Services
             this.mapper = mapper;
         }
         
-        public async Task<AttendanceDto> AttendShow(AttendanceDto attendance, int showId)
+        public async Task<AttendanceDto> AttendShow(int showId)
         {
-            var updatedAttendanceDto = new AttendanceDto
-            {
-                AttendeeId = attendance.AttendeeId,
-                ShowId = showId
-            };
+            var attendance =  await unitOfWork.AttendanceRepository.GetAsync(a => a.ShowId == showId);
+            await unitOfWork.AttendanceRepository.UpdateAsync(attendance);
 
-            var updatedAttendance = mapper.Map<Attendance>(updatedAttendanceDto);
-            await unitOfWork.AttendanceRepository.UpdateAsync(updatedAttendance);
-
-            var returnedUpdatedShow = mapper.Map<AttendanceDto>(updatedAttendance);        
+            var returnedUpdatedShow = mapper.Map<AttendanceDto>(attendance);        
             return returnedUpdatedShow;
             
         }
 
-        public async Task<AttendanceDto> UnattendShow(AttendanceDto attendance, int showId)
+        public async Task<AttendanceDto> UnattendShow(int showId)
         {
-            var updatedAttendanceDto = new AttendanceDto
-            {
-                AttendeeId = attendance.AttendeeId,
-                ShowId = showId
-            };
-
-            var updatedAttendance = mapper.Map<Attendance>(updatedAttendanceDto);
+            var attendance = unitOfWork.AttendanceRepository.GetAsync(a => a.ShowId == showId);
+            var updatedAttendance = mapper.Map<Attendance>(attendance);
             await unitOfWork.AttendanceRepository.DeleteAsync(updatedAttendance);
             
             var returnedRemovedShow = mapper.Map<AttendanceDto>(updatedAttendance);

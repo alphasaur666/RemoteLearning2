@@ -19,7 +19,6 @@ namespace LiveShow.Api.Controllers
             this.genreService = genreService;
         }
 
-
         [HttpPost]
         public async Task<IActionResult> AddGenre(GenreDto genre)
         {
@@ -27,10 +26,10 @@ namespace LiveShow.Api.Controllers
             return Ok(addedGenre);
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteGenre(GenreDto genre)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteGenre(int genreId)
         {
-            var deletedGenre = await genreService.DeleteGenre(genre);
+            var deletedGenre = await genreService.DeleteGenre(genreId);
             return Ok(deletedGenre);
         }
 
