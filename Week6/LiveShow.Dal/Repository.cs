@@ -55,7 +55,7 @@ namespace LiveShow.Dal
             await SaveChanges();
         }
 
-        public async Task SaveChanges()
+        private async Task SaveChanges()
         {
             await dbContext.SaveChangesAsync();
         }

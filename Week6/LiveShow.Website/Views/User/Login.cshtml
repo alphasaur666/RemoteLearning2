@@ -1,22 +1,31 @@
-﻿<body class="text-center">
-    
+﻿@model LiveShow.Services.Models.User.UserLoginDto
+@{
+    ViewData["Title"] = "Login";
+}
+<h1>Log In</h1>
+<body class="text-center">
     <form class="form-signin" method="post" asp-controller="User" asp-action="Login">
         <div class="container">
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-            <label class="sr-only">Username</label>
-            <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
-            <label class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+
+            <label class="sr-only" asp-for="Username">Username</label>
+            <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus asp-for="Username">
+
+            <label class="sr-only" asp-for="Password">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required autofocus asp-for="Password">
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit" formmethod="post" asp-controller = "User" asp-action="Login">Log In</button>
 
 
             <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
         </div>
 
         <div class="container">
-            <span class="register">No account? <a asp-controller = "User" asp-action="Register">Register</a></span>
+            <span class="register">No account? <a asp-controller="User" asp-action="Register">Register</a></span>
         </div>
 
-
+        <div>
+            @ViewBag.Error
+        </div>
     </form>
 </body>

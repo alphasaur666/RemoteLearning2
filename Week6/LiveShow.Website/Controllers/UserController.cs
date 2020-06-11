@@ -22,29 +22,54 @@ namespace LiveShow.Website.Controllers
             service = Service;
         }
 
-        public async Task<IActionResult> Index(int Id)
-        {
-            var result = await service.GetProfile(Id);
-            return View(result);
-        }
-
         public async Task<IActionResult> Artists()
         {
             var result = await service.GetArtists();
             return View(result);
         }
 
-        public async Task<IActionResult> Register(UserDto user)
+        [HttpGet]
+        public IActionResult Register()
         {
-            var result = await service.Register(user);
-            return View(result);
+            var user = new UserDto();
+            return View(user);
         }
 
-        public async Task<IActionResult> Login(UserDto user)
+        [HttpPost]
+        public async Task<IActionResult> Register(UserDto user)
         {
-            var result = await service.Login(user);
-            return View(result);
+            if (TryValidateModel(user))
+            {
+                var result = await service.Register(user);
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Artists");
+                }
+            }        
+            return View();
         }
-        
+        [HttpGet]
+        public IActionResult Login()
+        {
+            var userLoginDto = new UserLoginDto();
+            return View(userLoginDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(UserLoginDto userLoginDto)
+        {
+            if (TryValidateModel(userLoginDto))
+            {
+                var response = await service.Login(userLoginDto);
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Artists");
+                }
+                ViewBag.Error = "Invalid username or password.";
+            }
+            return View();
+        }
+
+
     }
 }

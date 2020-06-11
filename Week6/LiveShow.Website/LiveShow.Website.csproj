@@ -13,8 +13,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LiveShow.Api\LiveShow.Api.csproj" />
-    <ProjectReference Include="..\LiveShow.Dal\LiveShow.Dal.csproj" />
-    <ProjectReference Include="..\LiveShow.Services\LiveShow.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Attendances\" />
   </ItemGroup>
 
 </Project>

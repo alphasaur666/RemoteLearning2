@@ -11,6 +11,8 @@ namespace LiveShow.Services.Models.Show
 
         public UserDto Artist { get; set; }
 
+        public int ArtistId { get; set; }
+
         public DateTime DateTime { get; set; }
 
         public string Venue { get; set; }

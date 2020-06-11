@@ -23,14 +23,14 @@ namespace LiveShow.Api.Controllers
             this.attendanceService = attendanceService;
         }
 
-        [HttpPost]
+        [HttpPatch("{showId}")]
         public async Task<IActionResult> AttendShow(int showId)
         {
             var updatedAttendance = await attendanceService.AttendShow(showId);
             return Ok(updatedAttendance);
         }
 
-        [HttpPatch("{showId}")]
+        [HttpDelete("{showId}")]
         public async Task<IActionResult> UnattendShow(int showId)
         {
            var updatedAttendance = await attendanceService.UnattendShow(showId);

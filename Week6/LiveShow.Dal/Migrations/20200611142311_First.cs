@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LiveShow.Dal.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class First : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,8 @@ namespace LiveShow.Dal.Migrations
                 name: "Genres",
                 columns: table => new
                 {
-                    Id = table.Column<byte>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 255, nullable: false)
                 },
                 constraints: table =>
@@ -63,17 +64,18 @@ namespace LiveShow.Dal.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsCanceled = table.Column<bool>(nullable: false),
-                    ArtistId = table.Column<long>(nullable: true),
+                    ArtistId1 = table.Column<long>(nullable: true),
+                    ArtistId = table.Column<int>(nullable: false),
                     DateTime = table.Column<DateTime>(nullable: false),
-                    Venue = table.Column<string>(maxLength: 255, nullable: true),
-                    GenreId = table.Column<byte>(nullable: false)
+                    Venue = table.Column<string>(maxLength: 255, nullable: false),
+                    GenreId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Shows", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Shows_Users_ArtistId",
-                        column: x => x.ArtistId,
+                        name: "FK_Shows_Users_ArtistId1",
+                        column: x => x.ArtistId1,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -118,7 +120,7 @@ namespace LiveShow.Dal.Migrations
                     Type = table.Column<int>(nullable: false),
                     OriginalDateTime = table.Column<DateTime>(nullable: true),
                     OriginalVenue = table.Column<string>(nullable: true),
-                    ShowId = table.Column<int>(nullable: true)
+                    ShowId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -128,7 +130,7 @@ namespace LiveShow.Dal.Migrations
                         column: x => x.ShowId,
                         principalTable: "Shows",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -171,9 +173,9 @@ namespace LiveShow.Dal.Migrations
                 column: "ShowId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Shows_ArtistId",
+                name: "IX_Shows_ArtistId1",
                 table: "Shows",
-                column: "ArtistId");
+                column: "ArtistId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Shows_GenreId",

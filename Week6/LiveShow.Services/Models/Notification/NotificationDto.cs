@@ -19,5 +19,7 @@ namespace LiveShow.Services.Models.Notification
 
         public ShowDto Show { get; set; }
 
+        public int ShowId { get; set; }
+
     }
 }

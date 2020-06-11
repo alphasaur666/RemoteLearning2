@@ -51,7 +51,7 @@ namespace LiveShow.Api.Controllers
         public async Task<IActionResult> AddShow(ShowDto show)
         {
             var Show = await showService.AddShow(show);
-            return Created(Url.Action("Show"), show);
+            return Ok(Show);
 
         }
 

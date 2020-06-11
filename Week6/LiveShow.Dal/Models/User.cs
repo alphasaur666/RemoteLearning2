@@ -7,14 +7,10 @@ namespace LiveShow.Dal.Models
     {
         public long Id { get; set; }
 
-        [MaxLength(100)]
-        [Required]
+
         public string Username { get; set; }
 
-        [MaxLength(100)]
-        [Required]
         public string Password { get; set; }
-
         [MaxLength(100)]
         [Required]
         public string FirstName { get; set; }

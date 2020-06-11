@@ -17,33 +17,45 @@
                 @Html.DisplayNameFor(model => model.First().Genre)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.First().Artist)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.First().Venue)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.First().DateTime)
+            </th>
+            <th>
+                Actions
             </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsCanceled)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Venue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateTime)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsCanceled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenreId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArtistId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Venue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary">Attend Show</button>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

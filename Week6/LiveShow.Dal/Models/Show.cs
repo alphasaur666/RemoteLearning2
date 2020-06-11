@@ -13,14 +13,18 @@ namespace LiveShow.Dal.Models
 
         public User Artist { get; set; }
 
+        public int ArtistId { get; set; }
+
         public DateTime DateTime { get; set; }
 
+        [Required]
         [StringLength(255)]
         public string Venue { get; set; }
 
         public Genre Genre { get; set; }
 
-        public byte GenreId { get; set; }
+        [Required]
+        public int GenreId { get; set; }
 
         public ICollection<Attendance> Attendances { get; private set; }
 

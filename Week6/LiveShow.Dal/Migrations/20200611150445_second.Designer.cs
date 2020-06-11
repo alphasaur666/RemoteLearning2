@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LiveShow.Dal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200608160016_ThirdMigration")]
-    partial class ThirdMigration
+    [Migration("20200611150445_second")]
+    partial class second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,8 +53,10 @@ namespace LiveShow.Dal.Migrations
 
             modelBuilder.Entity("LiveShow.Dal.Models.Genre", b =>
                 {
-                    b.Property<byte>("Id")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -82,7 +84,7 @@ namespace LiveShow.Dal.Migrations
                     b.Property<string>("OriginalVenue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ShowId")
+                    b.Property<int>("ShowId")
                         .HasColumnType("int");
 
                     b.Property<int>("Type")
@@ -102,25 +104,29 @@ namespace LiveShow.Dal.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("ArtistId")
+                    b.Property<int>("ArtistId")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("ArtistId1")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<byte>("GenreId")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsCanceled")
                         .HasColumnType("bit");
 
                     b.Property<string>("Venue")
+                        .IsRequired()
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArtistId");
+                    b.HasIndex("ArtistId1");
 
                     b.HasIndex("GenreId");
 
@@ -145,17 +151,13 @@ namespace LiveShow.Dal.Migrations
                         .HasMaxLength(100);
 
                     b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
                     b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -214,14 +216,16 @@ namespace LiveShow.Dal.Migrations
                 {
                     b.HasOne("LiveShow.Dal.Models.Show", "Show")
                         .WithMany()
-                        .HasForeignKey("ShowId");
+                        .HasForeignKey("ShowId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("LiveShow.Dal.Models.Show", b =>
                 {
                     b.HasOne("LiveShow.Dal.Models.User", "Artist")
                         .WithMany()
-                        .HasForeignKey("ArtistId");
+                        .HasForeignKey("ArtistId1");
 
                     b.HasOne("LiveShow.Dal.Models.Genre", "Genre")
                         .WithMany()

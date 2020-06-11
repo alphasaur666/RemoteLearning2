@@ -71,9 +71,9 @@ namespace LiveShow.Services.Services
             return returnedUpdatedUser;
         }
 
-        public async Task<bool> CheckCreditentials(string username, string password)
+        public async Task<bool> CheckCreditentials(UserLoginDto user)
         {
-            var userDto = await unitOfWork.UserRepository.GetAsync(u => u.Username == username && u.Password == password);
+            var userDto = await unitOfWork.UserRepository.GetAsync(u => u.Username == user.Username && u.Password == user.Password);
             if (userDto != null)
             {
                 return true;

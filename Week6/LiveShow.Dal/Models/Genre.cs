@@ -4,7 +4,7 @@ namespace LiveShow.Dal.Models
 {
     public class Genre
     {
-        public byte Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(255)]

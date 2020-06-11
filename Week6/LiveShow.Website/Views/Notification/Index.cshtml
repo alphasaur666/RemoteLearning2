@@ -1,0 +1,52 @@
+﻿@model List<LiveShow.Services.Models.Notification.NotificationDto>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>My notifications</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ShowId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().OriginalDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().OriginalVenue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().DateTime)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShowId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OriginalDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OriginalVenue)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary">Read Notification</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

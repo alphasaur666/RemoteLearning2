@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -42,6 +43,15 @@ namespace LiveShow.Api.Controllers
             return Ok(userProfile);
         }
 
+        [HttpPost()]
+
+        [HttpGet("users")]
+        public IActionResult GetUsers()
+        {
+            var result = userService.GetAllUsers();
+            return Ok(result);
+        }
+
         [HttpGet("artists")]
         public IActionResult GetArtists()
         {
@@ -64,19 +74,19 @@ namespace LiveShow.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> Login(UserLoginDto user)
         {
-            bool acceptedCreditentials = await userService.CheckCreditentials(username, password);
+            bool acceptedCreditentials = await userService.CheckCreditentials(user);
             if (acceptedCreditentials == true)
             {
                 var identity = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, username)
+                    new Claim(ClaimTypes.Name, user.Username)
                 }, CookieAuthenticationDefaults.AuthenticationScheme);
 
                 var principal = new ClaimsPrincipal(identity);
                 var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                return Ok(login);
+                return Ok("Succes!");
             }
             return BadRequest("Invalid creditentials!");
         }

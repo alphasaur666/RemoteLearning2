@@ -1,4 +1,5 @@
-﻿using LiveShow.Services.Models.Show;
+﻿using LiveShow.Services.Models.Notification;
+using LiveShow.Services.Models.Show;
 using LiveShow.Services.Models.User;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace LiveShow.Website
         Task<ShowDto> GetProfile(int id);
         Task<List<GenreDto>> GetGenres();
         Task<HttpResponseMessage> Register(UserDto userDto);
-        Task<HttpResponseMessage> Login(UserDto userDto);
+        Task<HttpResponseMessage> Login(UserLoginDto userLoginDto);
+        Task<List<NotificationDto>> GetNotifications();
     }
 }

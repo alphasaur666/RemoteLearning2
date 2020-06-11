@@ -56,7 +56,6 @@ namespace LiveShow.Services.Services
             await unitOfWork.ShowRepository.AddAsync(addedShow);
             var returnedShow = mapper.Map<ShowDto>(addedShow);
             return returnedShow;
-
         }
 
         public async Task<ShowDto> UpdateShow(ShowDto show)

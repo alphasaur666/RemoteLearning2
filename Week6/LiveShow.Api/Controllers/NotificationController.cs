@@ -39,7 +39,6 @@ namespace LiveShow.Api.Controllers
         {
             var creteadNotification = await notificationService.CreateNotification(notificationDto);
             return Ok(creteadNotification);
-
         }
 
         

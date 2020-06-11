@@ -16,6 +16,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.First().Type)
             </th>
+            <th>
+                Actions
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -30,6 +33,10 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Follow</button>
+                    <button type="button" class="btn btn-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">Unfollow</button>
                 </td>
             </tr>
         }

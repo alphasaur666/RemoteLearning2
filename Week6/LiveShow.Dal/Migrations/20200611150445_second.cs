@@ -2,23 +2,19 @@
 
 namespace LiveShow.Dal.Migrations
 {
-    public partial class ThirdMigration : Migration
+    public partial class second : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
                 name: "Password",
                 table: "Users",
-                maxLength: 100,
-                nullable: false,
-                defaultValue: "");
+                nullable: true);
 
             migrationBuilder.AddColumn<string>(
                 name: "Username",
                 table: "Users",
-                maxLength: 100,
-                nullable: false,
-                defaultValue: "");
+                nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -106,7 +106,7 @@ namespace LiveShow.Website
             return JsonConvert.DeserializeObject<NotificationDto>(resultText);
         }
 
-        public async Task<List<NotificationDto>> GetNotification()
+        public async Task<List<NotificationDto>> GetNotifications()
         {
             HttpResponseMessage result = await httpClient.GetAsync($"{apiEndpoint}Notification/");
 
@@ -137,18 +137,20 @@ namespace LiveShow.Website
         public async Task<HttpResponseMessage> Register(UserDto userDto)
         {
             var userToJson = JsonConvert.SerializeObject(userDto);
-            HttpContent c = new StringContent(userToJson, Encoding.UTF8, "application/json");
-            var result = await httpClient.PostAsync($"{apiEndpoint}/User/register/", c);
+            var content = new StringContent(userToJson, Encoding.UTF8,"application/json");
+            var result = await httpClient.PostAsync($"{apiEndpoint}User/Register/", content);
             return result;
         }
 
-        public async Task<HttpResponseMessage> Login(UserDto user)
+        public async Task<HttpResponseMessage> Login(UserLoginDto userLoginDto)
         {
-            var userToJson = JsonConvert.SerializeObject(user);
-            var content = new StringContent(userToJson, Encoding.UTF8, "applciation/json");
-            var result = await httpClient.PostAsync($"{apiEndpoint}/user/login", content);
+            var userToJson = JsonConvert.SerializeObject(userLoginDto);
+            var content = new StringContent(userToJson, Encoding.UTF8,"application/json");
+            var result = await httpClient.PostAsync($"{apiEndpoint}User/Login/",content);
             return result;
         }
-        
+
+       
+
     }
 }

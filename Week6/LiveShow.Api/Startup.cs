@@ -70,16 +70,15 @@ namespace LiveShow.Api
             }
 
             app.UseRouting();
+            app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
-            app.UseHttpsRedirection();
 
         }
     }

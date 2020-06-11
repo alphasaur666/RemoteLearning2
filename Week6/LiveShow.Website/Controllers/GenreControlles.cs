@@ -18,16 +18,21 @@ namespace LiveShow.Website.Controllers
             api = apiService;
         }
         
-        /*public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             var result = await api.GetGenres();
             return View(result);
         }
+        
+        /*
         public async Task<IActionResult> AddGenre()
         {
-            var result = await api.Crea()
+            var result = await api.
             return View(result);
         }
         */
+        
+
+        
     }
 }
