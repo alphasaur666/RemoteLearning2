@@ -40,7 +40,6 @@ namespace LiveShow.Api
             });
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
-
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAttendanceService, AttendanceService>();
             services.AddScoped<IFollowerService, FollowerService>();
@@ -71,6 +70,9 @@ namespace LiveShow.Api
             }
 
             app.UseRouting();
+            app.UseCookiePolicy();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

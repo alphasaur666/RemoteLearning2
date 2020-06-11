@@ -1,5 +1,40 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model LiveShow.Services.Models.User.UserDto
 @{
+    ViewData["Title"] = "Register";
 }
+
+<h1>Register</h1>
+
+<body class="text-center">
+    <form method="post" asp-controller="User" asp-action="Register">
+        <div class="container" asp-validation-summary="ModelOnly">
+
+            <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
+
+            <label class="sr-only" asp-for="Username">Username</label>
+            <input type="text" class="form-control" placeholder="Username" required autofocus asp-for="Username">
+
+
+            <label class="sr-only" asp-for="Password">Password</label>
+            <input type="password" class="form-control" placeholder="Password" required autofocus asp-for="Password">
+
+            <label class="sr-only" asp-for="FirstName">Username</label>
+            <input type="text" class="form-control" placeholder="First Name" required autofocus asp-for="FirstName">
+
+            <label class="sr-only" asp-for="LastName">Username</label>
+            <input type="text" class="form-control" placeholder="Last Name" required autofocus asp-for="LastName">
+
+            <label class="sr-only" asp-for="Type">Username</label>
+            <input type="text" class="form-control" placeholder="Type" required autofocus asp-for="Type">
+
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+
+
+            <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+        </div>
+        <div>
+            @ViewBag.Error
+        </div>
+    </form>
+</body>

@@ -1,4 +1,5 @@
-﻿using LiveShow.Services.Models.Followers;
+﻿using LiveShow.Dal.Models;
+using LiveShow.Services.Models.Followers;
 using LiveShow.Services.Models.Notification;
 using LiveShow.Services.Models.Show;
 using LiveShow.Services.Models.User;
@@ -133,9 +134,6 @@ namespace LiveShow.Website
         }
 
 
-
-
-
         public async Task<HttpResponseMessage> Register(UserDto userDto)
         {
             var userToJson = JsonConvert.SerializeObject(userDto);
@@ -147,11 +145,10 @@ namespace LiveShow.Website
         public async Task<HttpResponseMessage> Login(UserDto user)
         {
             var userToJson = JsonConvert.SerializeObject(user);
-            HttpContent content = new StringContent(userToJson, Encoding.UTF8, "application/json");
-            var result = await httpClient.PostAsync($"{apiEndpoint}/User/login/", content);
+            var content = new StringContent(userToJson, Encoding.UTF8, "applciation/json");
+            var result = await httpClient.PostAsync($"{apiEndpoint}/user/login", content);
             return result;
         }
-
-
+        
     }
 }

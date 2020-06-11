@@ -17,15 +17,17 @@ namespace LiveShow.Website.Controllers
             _logger = logger;
             api = apiService;
         }
-        public async Task<IActionResult> Index()
+        
+        /*public async Task<IActionResult> Index()
         {
             var result = await api.GetGenres();
             return View(result);
         }
-        /*public async Task<IActionResult> AddGenre()
+        public async Task<IActionResult> AddGenre()
         {
-            var result = await api.AddGenre()
+            var result = await api.Crea()
             return View(result);
-        }*/
+        }
+        */
     }
 }

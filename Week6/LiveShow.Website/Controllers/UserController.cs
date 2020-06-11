@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using LiveShow.Services.Models.User;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -23,7 +26,6 @@ namespace LiveShow.Website.Controllers
         {
             var result = await service.GetProfile(Id);
             return View(result);
-
         }
 
         public async Task<IActionResult> Artists()
@@ -32,16 +34,17 @@ namespace LiveShow.Website.Controllers
             return View(result);
         }
 
-        /*public async Task<IActionResult> Register()
+        public async Task<IActionResult> Register(UserDto user)
         {
-            var result = await service.RegisterUser();
+            var result = await service.Register(user);
             return View(result);
-        }*/
+        }
 
         public async Task<IActionResult> Login(UserDto user)
         {
             var result = await service.Login(user);
             return View(result);
         }
+        
     }
 }

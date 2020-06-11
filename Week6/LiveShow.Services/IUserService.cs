@@ -14,8 +14,7 @@ namespace LiveShow.Services
         IEnumerable<UserDto> GetAllUsers();
         Task<UserDto> UpdateUser(UserDto user);
         IEnumerable<UserDto> GetArtists();
-        ClaimsIdentity Login(UserDto user);
-
-
+        Task<UserDto> GetUserByUsernameAndPassword(string username, string password);
+        Task<bool> CheckCreditentials(string username, string password);
     }
 }

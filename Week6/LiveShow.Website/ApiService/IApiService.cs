@@ -15,6 +15,6 @@ namespace LiveShow.Website
         Task<ShowDto> GetProfile(int id);
         Task<List<GenreDto>> GetGenres();
         Task<HttpResponseMessage> Register(UserDto userDto);
-        Task<HttpResponseMessage> Login(UserDto user);
+        Task<HttpResponseMessage> Login(UserDto userDto);
     }
 }

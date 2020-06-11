@@ -25,15 +25,11 @@ namespace LiveShow.Services.Services
             this.mapper = mapper;
         }
 
-        public ClaimsIdentity Login(UserDto user)
+        public async Task<UserDto> GetUserByUsernameAndPassword(string username, string password)
         {
-            var identity = new ClaimsIdentity(new[]
-            {
-             new Claim(ClaimTypes.Name, user.Username)
-            },
-            CookieAuthenticationDefaults.AuthenticationScheme);
-
-            return identity;
+            var user = await unitOfWork.UserRepository.GetAsync(u => u.Username == username && u.Password == password);
+            var userDto = mapper.Map<UserDto>(user);
+            return userDto;
         }
 
         public async Task<UserDto> RegisterUser(UserDto user)
@@ -73,6 +69,19 @@ namespace LiveShow.Services.Services
 
             var returnedUpdatedUser = mapper.Map<UserDto>(userToUpdate);
             return returnedUpdatedUser;
+        }
+
+        public async Task<bool> CheckCreditentials(string username, string password)
+        {
+            var userDto = await unitOfWork.UserRepository.GetAsync(u => u.Username == username && u.Password == password);
+            if (userDto != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }

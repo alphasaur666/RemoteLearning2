@@ -16,7 +16,5 @@ namespace LiveShow.Services
         Task<ShowDto> UpdateShow(ShowDto show);
         IEnumerable<ShowDto> GetAllShowsByArtist(UserDto artist);
         IEnumerable<ShowDto> GetAllShowsByVenue(string Venue);
-
-
     }
 }
