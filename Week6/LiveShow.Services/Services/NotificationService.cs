@@ -33,7 +33,7 @@ namespace LiveShow.Services.Services
             var notificationsDto = mapper.Map<IEnumerable<NotificationDto>>(notifications);
             return notificationsDto;
         }
-        
+
         public async Task<NotificationDto> CreateNotification(NotificationDto notification)
         {
             var creadtedNotification = mapper.Map<Notification>(notification);

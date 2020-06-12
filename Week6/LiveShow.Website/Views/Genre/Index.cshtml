@@ -13,19 +13,29 @@
             <th>
                 @Html.DisplayNameFor(model => model.First().Name)
             </th>
+            <th>
+                Actions
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary">Edit Genre</button>
+                <button type="button" class="btn btn-primary">Delete Genre</button>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
+<div class="container">
+    <button type="button" class="btn btn-primary" asp-controller="Genre" asp-action="AddGenre">Add Genre</button>
+</div>

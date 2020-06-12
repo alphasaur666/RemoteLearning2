@@ -44,6 +44,14 @@ namespace LiveShow.Services.Services
             return followersDto;
         }
 
+        public IEnumerable<FollowerDto> GetAllFollowersOfUser(UserDto user)
+        {
+            var searchedUser = mapper.Map<User>(user);
+            var followers = unitOfWork.FollowingRepository.GetAll(u => u.Followee == searchedUser);
+            var followersDto = mapper.Map<IEnumerable<FollowerDto>>(followers);
+            return followersDto;
+        }
+
         public async Task<FollowerDto> RemoveFollower(int FollowerId) //for unfollow
         {
             var removedFollower = unitOfWork.FollowingRepository.GetAsync(u => u.FollowerId == FollowerId);

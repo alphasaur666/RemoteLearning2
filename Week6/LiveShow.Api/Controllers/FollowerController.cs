@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using LiveShow.Services;
 using LiveShow.Services.Models.Followers;
 using LiveShow.Services.Models.User;
@@ -13,11 +14,13 @@ namespace LiveShow.Api.Controllers
     public class FollowerController : LiveShowApiControllerBase
     {
 
-        public IFollowerService followerService;
+        private readonly IFollowerService followerService;
+        private readonly IMapper mapper;
 
-        public FollowerController(IFollowerService followerService)
+        public FollowerController(IFollowerService followerService, IMapper mapper)
         {
             this.followerService = followerService;
+            this.mapper = mapper;
         }
 
         [HttpPost]
@@ -33,6 +36,14 @@ namespace LiveShow.Api.Controllers
             var unfollowTask = await followerService.RemoveFollower(id);
             return Ok(unfollowTask);
         }
+
+        [HttpPost("followers")]
+        public IActionResult FollowingsOfUser(UserDto user)
+        {
+            var followers = followerService.GetAllFollowersOfUser(user);
+            return Ok(followers);
+        }
+
         
         
     }

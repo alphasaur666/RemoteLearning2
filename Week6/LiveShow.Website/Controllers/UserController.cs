@@ -43,7 +43,7 @@ namespace LiveShow.Website.Controllers
                 var result = await service.Register(user);
                 if (result.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("Artists");
+                    return RedirectToAction("Login");
                 }
             }        
             return View();

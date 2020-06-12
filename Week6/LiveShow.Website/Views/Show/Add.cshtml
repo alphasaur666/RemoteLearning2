@@ -1,0 +1,31 @@
+﻿@model LiveShow.Services.Models.Show.ShowDto
+@{
+    ViewData["Title"] = "Add Show";
+}
+<h1>Add Show</h1>
+<body class="text-center">
+    <form class="form-signin" method="post" asp-controller="Show" asp-action="Add">
+        <div class="container">
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+            <label class="sr-only" asp-for="IsCanceled">Is Canceled</label>
+            <input type="checkbox" id="inputIsCanceled" class="form-control" asp-for="IsCanceled">
+
+            <label class="sr-only" asp-for="ArtistId">Artist Id</label>
+            <input type="text" id="inputArtistId" class="form-control" placeholder="Artist Id" required autofocus asp-for="ArtistId">
+
+            <label class="sr-only" asp-for="DateTime">Date</label>
+            <input type="text" id="inputDateTime" class="form-control" placeholder="Date" required autofocus asp-for="DateTime">
+
+            <label class="sr-only" asp-for="Venue">Date</label>
+            <input type="text" id="inputVenue" class="form-control" placeholder="Venue Name" required autofocus asp-for="Venue">
+
+            <label class="sr-only" asp-for="GenreId">Date</label>
+            <input type="text" id="inputGenreId" class="form-control" placeholder="Genre Id" required autofocus asp-for="GenreId">
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit" formmethod="post" asp-controller="Show" asp-action="Add">Add Show</button>
+
+            <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+        </div>
+    </form>
+</body>

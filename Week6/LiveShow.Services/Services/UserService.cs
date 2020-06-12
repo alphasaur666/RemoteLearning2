@@ -71,6 +71,13 @@ namespace LiveShow.Services.Services
             return returnedUpdatedUser;
         }
 
+        public async Task<UserDto> GetUserByUsername(string username)
+        {
+            var user = await unitOfWork.UserRepository.GetAsync(u => u.Username == username);
+            var userDto = mapper.Map<UserDto>(user);
+            return userDto;
+        }
+
         public async Task<bool> CheckCreditentials(UserLoginDto user)
         {
             var userDto = await unitOfWork.UserRepository.GetAsync(u => u.Username == user.Username && u.Password == user.Password);

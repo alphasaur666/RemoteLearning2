@@ -3,6 +3,7 @@ using LiveShow.Services.Models.Followers;
 using LiveShow.Services.Models.Notification;
 using LiveShow.Services.Models.Show;
 using LiveShow.Services.Models.User;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -23,41 +24,8 @@ namespace LiveShow.Website
             this.httpClient = httpClient;
         }
 
-        public async Task<List<UserDto>> GetArtists()
-        {
-            HttpResponseMessage result = await httpClient.GetAsync($"{apiEndpoint}User/Artists/");
-
-            string resultText = await result.Content.ReadAsStringAsync();
-
-            return JsonConvert.DeserializeObject<List<UserDto>>(resultText);
-        }
-
-        public async Task<List<ShowDto>> GetShows()
-        {
-            HttpResponseMessage result = await httpClient.GetAsync($"{apiEndpoint}Show/");
-
-            string resultText = await result.Content.ReadAsStringAsync();
-
-            return JsonConvert.DeserializeObject<List<ShowDto>>(resultText);
-        }
-
-        public async Task<ShowDto> GetProfile(int id)
-        {
-            HttpResponseMessage result = await httpClient.GetAsync($"{apiEndpoint}User/{id}");
-
-            string resultText = await result.Content.ReadAsStringAsync();
-
-            return JsonConvert.DeserializeObject<ShowDto>(resultText);
-        }
-
-        public async Task<List<GenreDto>> GetGenres()
-        {
-            HttpResponseMessage result = await httpClient.GetAsync($"{apiEndpoint}Genre/");
-
-            string resultText = await result.Content.ReadAsStringAsync();
-
-            return JsonConvert.DeserializeObject<List<GenreDto>>(resultText);
-        }
+        //Post Requests
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public async Task<HttpResponseMessage> AddGenre(HttpContent genre)
         {
@@ -67,10 +35,13 @@ namespace LiveShow.Website
             return result;
         }
 
-        public async Task<HttpResponseMessage> DeleteGenre(int genreId)
+        public async Task<HttpResponseMessage> AddShow(ShowDto show)
         {
-            var result = await httpClient.DeleteAsync($"{apiEndpoint}/Genre/{genreId}");
+            var showToJson = JsonConvert.SerializeObject(show);
+            var content = new StringContent(showToJson, Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync($"{apiEndpoint}/Show/", content);
             return result;
+
         }
 
         public async Task<HttpResponseMessage> Follow(FollowerDto follower)
@@ -89,13 +60,67 @@ namespace LiveShow.Website
             return result;
         }
 
+        public async Task<HttpResponseMessage> Register(UserDto userDto)
+        {
+            var userToJson = JsonConvert.SerializeObject(userDto);
+            var content = new StringContent(userToJson, Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync($"{apiEndpoint}User/Register/", content);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> Login(UserLoginDto userLoginDto)
+        {
+            var userToJson = JsonConvert.SerializeObject(userLoginDto);
+            var content = new StringContent(userToJson, Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync($"{apiEndpoint}User/Login/", content);
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> Attend(int showId)
+        {
+            var showIdToJson = JsonConvert.SerializeObject(showId);
+            var content = new StringContent(showIdToJson, Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync($"{apiEndpoint}Attendance/attend/{showId}", content);
+            return result;
+        }
+        public async Task<HttpResponseMessage> FollowingsOfUser(UserDto user)
+        {
+            var userTojson = JsonConvert.SerializeObject(user);
+            var content = new StringContent(userTojson, Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync($"{apiEndpoint}Follower/followers", content);
+            return result;
+        }
+
+
+        //DeleteRequests
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public async Task<HttpResponseMessage> DeleteShow(int ShowId)
+        {
+            var result = await httpClient.DeleteAsync($"{apiEndpoint}/Show/{ShowId}");
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> Unattend(int showId)
+        {
+            var result = await httpClient.DeleteAsync($"{apiEndpoint}/Attendance/unattend/{showId}");
+            return result;
+        }
+
+        public async Task<HttpResponseMessage> DeleteGenre(int genreId)
+        {
+            var result = await httpClient.DeleteAsync($"{apiEndpoint}/Genre/{genreId}");
+            return result;
+        }
+
         public async Task<HttpResponseMessage> Unfollow(int followerId)
         {
             var result = await httpClient.DeleteAsync($"{apiEndpoint}/Follow/{followerId}");
             return result;
         }
 
-        //Delete Follower
+        //Get Requests
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public async Task<NotificationDto> GetNotification(int notificationId)
         {
@@ -133,24 +158,55 @@ namespace LiveShow.Website
             return JsonConvert.DeserializeObject<List<UserDto>>(resultText);
         }
 
-
-        public async Task<HttpResponseMessage> Register(UserDto userDto)
+        public async Task<List<UserDto>> GetArtists()
         {
-            var userToJson = JsonConvert.SerializeObject(userDto);
-            var content = new StringContent(userToJson, Encoding.UTF8,"application/json");
-            var result = await httpClient.PostAsync($"{apiEndpoint}User/Register/", content);
-            return result;
+            HttpResponseMessage result = await httpClient.GetAsync($"{apiEndpoint}User/Artists/");
+
+            string resultText = await result.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<List<UserDto>>(resultText);
         }
 
-        public async Task<HttpResponseMessage> Login(UserLoginDto userLoginDto)
+        public async Task<UserDto> GetLoggedUser()
         {
-            var userToJson = JsonConvert.SerializeObject(userLoginDto);
-            var content = new StringContent(userToJson, Encoding.UTF8,"application/json");
-            var result = await httpClient.PostAsync($"{apiEndpoint}User/Login/",content);
-            return result;
+            var result = await httpClient.GetAsync($"{apiEndpoint}User/loggedUser");
+
+            string resultText = await result.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<UserDto>(resultText);
         }
 
-       
+        public async Task<List<ShowDto>> GetShows()
+        {
+            HttpResponseMessage result = await httpClient.GetAsync($"{apiEndpoint}Show/");
+
+            string resultText = await result.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<List<ShowDto>>(resultText);
+        }
+
+        public async Task<ShowDto> GetProfile(int id)
+        {
+            HttpResponseMessage result = await httpClient.GetAsync($"{apiEndpoint}User/{id}");
+
+            string resultText = await result.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<ShowDto>(resultText);
+        }
+
+        public async Task<List<GenreDto>> GetGenres()
+        {
+            HttpResponseMessage result = await httpClient.GetAsync($"{apiEndpoint}Genre/");
+
+            string resultText = await result.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<List<GenreDto>>(resultText);
+        }
+
+        
+
+
+
 
     }
 }

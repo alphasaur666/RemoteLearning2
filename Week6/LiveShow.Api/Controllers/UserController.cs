@@ -43,8 +43,6 @@ namespace LiveShow.Api.Controllers
             return Ok(userProfile);
         }
 
-        [HttpPost()]
-
         [HttpGet("users")]
         public IActionResult GetUsers()
         {
@@ -86,9 +84,24 @@ namespace LiveShow.Api.Controllers
 
                 var principal = new ClaimsPrincipal(identity);
                 var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                return Ok("Succes!");
+                return Ok(login);
             }
             return BadRequest("Invalid creditentials!");
+        }
+
+        [HttpGet("loggedUser")]
+        public async Task<IActionResult> VerifyLogin()
+        {
+            var identity = User.Identity.Name;
+            if (identity == null)
+            {
+                return BadRequest("No one logged in!");
+            }
+            else
+            {
+                var user = await userService.GetUserByUsername(User.Identity.Name);
+                return Ok(user);
+            }
         }
 
     }

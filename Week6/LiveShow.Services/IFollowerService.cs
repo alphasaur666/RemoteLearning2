@@ -1,4 +1,5 @@
-﻿using LiveShow.Services.Models.Followers;
+﻿using LiveShow.Dal.Models;
+using LiveShow.Services.Models.Followers;
 using LiveShow.Services.Models.User;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,8 @@ namespace LiveShow.Services
     {
         Task<FollowerDto> AddFollower(FollowerDto follower);
         Task<FollowerDto> RemoveFollower(int FollowerId);
+        Task<FollowerDto> GetFollower(int FollowerId);
+        IEnumerable<FollowerDto> GetAllFollowers(int FolloweeId);
+        IEnumerable<FollowerDto> GetAllFollowersOfUser(UserDto user);
     }
 }

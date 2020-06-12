@@ -59,7 +59,7 @@ namespace LiveShow.Api.Controllers
         public async Task<IActionResult> UpdateShow(ShowDto show)
         {
             var updatedShow = await showService.UpdateShow(show);
-            return Ok(show);
+            return Ok(updatedShow);
         }
 
         [HttpDelete("{id}")]

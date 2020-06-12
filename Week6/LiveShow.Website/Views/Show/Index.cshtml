@@ -2,60 +2,64 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Shows on LiveShow</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().IsCanceled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Artist)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Venue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().DateTime)
-            </th>
-            <th>
-                Actions
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsCanceled)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GenreId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArtistId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Venue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateTime)
-            </td>
-            <td>
-                <button type="button" class="btn btn-primary">Attend Show</button>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+    <body>
+        <h1>Shows on LiveShow</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().IsCanceled)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Genre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Artist)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Venue)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().DateTime)
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsCanceled)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GenreId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ArtistId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Venue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateTime)
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary">Attend Show</button>
+                            <button type="button" class="btn btn-primary">Unattend Show</button>
+                            <button type="button" class="btn btn-primary">Delete Show</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+     <button class="btn-primary" asp-controller="Show" asp-action="Add">Add Show</button>
+    </body>
